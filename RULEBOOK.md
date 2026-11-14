@@ -2,9 +2,6 @@
 
 *Version 0.1 (draft) · 2–4 players · ~30 minutes*
 
-> Numbers marked **(provisional)** have not been balanced yet and will probably change.
-> Sector and cluster names in the examples are placeholders. The final map is still being designed.
-
 ---
 
 ## Contents
@@ -34,8 +31,6 @@ exist at two positions at once, until someone looks.
 
 Your job is to command your fleets, outthink your rivals, and take the frontier.
 
----
-
 ## 2. Overview
 
 QuantumRisk is a game of territorial conquest. On your turn you get reinforcements, attack
@@ -52,15 +47,13 @@ conquest games:
 So the uncertainty is no longer "how will the dice roll?" It is "is there a fleet hiding here or
 not?" You decide how much uncertainty goes on the board, and where.
 
----
-
 ## 3. Components
 
 QuantumRisk is a digital game. The game tracks all of the following:
 
 - **The map:** 24 sectors connected by hyperlanes, grouped into 5 clusters.
 
-  | Cluster | Sectors | Cluster bonus **(provisional)** |
+  | Cluster | Sectors | Cluster bonus |
   |---|---|---|
   | Cluster A | 4 | +2 |
   | Cluster B | 4 | +2 |
@@ -73,7 +66,7 @@ QuantumRisk is a digital game. The game tracks all of the following:
   - **Quantum branch** (if any), shown as a translucent "ghost" badge with the size of the
     superposed stack, e.g. `5 + ⟨6?⟩`.
 - **Sector cards:** one per sector (24). Each shows a particle: **proton**, **neutron** or
-  **electron** (8 of each). There are also 2 **photon** wild cards **(provisional)**.
+  **electron** (8 of each). There are also 2 **photon** wild cards.
 - **Quantum cards:** special-action cards (see [§9](#9-cards)).
 - **Mission cards:** secret objectives (see [§5](#5-how-to-win)).
 - **Strongholds:** a few sectors are marked as Strongholds. They give **+1 defence** (see
@@ -82,15 +75,13 @@ QuantumRisk is a digital game. The game tracks all of the following:
   Moth Quantum platform, either on real quantum hardware or on Moth's quantum emulator. The game log
   shows each measurement result and its source.
 
----
-
 ## 4. Setup
 
 1. **Choose a mode:** *Missions* (default) or *Global Domination*.
 2. **Turn order** is randomized.
 3. **Sectors are dealt** randomly and evenly:
 
-   | Players | Sectors each | Starting troops each **(provisional)** |
+   | Players | Sectors each | Starting troops each |
    |---|---|---|
    | 2 (+ neutral) | 8 (neutral gets 8) | 22 |
    | 3 | 8 | 20 |
@@ -102,17 +93,15 @@ QuantumRisk is a digital game. The game tracks all of the following:
 6. In Missions mode each player gets **one secret mission**.
 7. Nobody starts with quantum stacks. The first player begins.
 
----
-
 ## 5. How to win
 
 ### Missions mode (default)
 
 You win **as soon as you complete your secret mission**, even in the middle of another player's
-turn, e.g. by surviving an attack. If two missions are completed at the same moment, the player whose turn it is wins
-**(provisional)**. Missions are hidden from the other players.
+turn, e.g. by surviving an attack. If two missions are completed at the same moment, the player whose turn it is wins.
+Missions are hidden from the other players.
 
-Mission list **(provisional; cluster names will be filled in once the map is final)**:
+Mission list:
 
 | # | Mission | Condition |
 |---|---|---|
@@ -130,8 +119,6 @@ conquered. In other words, be the last player standing.
 
 A player who controls no sectors is eliminated. The player who took their last sector **takes all
 their cards**.
-
----
 
 ## 6. Your turn
 
@@ -175,8 +162,6 @@ Move real troops between your sectors, as many as you like. A move must follow a
 of sectors you control, and every sector must keep **at least 1 real troop**. Quantum stacks can't
 be moved; only real troops can. 
 
----
-
 ## 7. Combat
 
 ### 7.1 Declaring an attack
@@ -216,8 +201,6 @@ be moved; only real troops can.
 
 Since there are no dice, you can always calculate a battle against **real** troops exactly.
 Uncertainty only appears when a quantum stack might be involved.
-
----
 
 ## 8. Quantum stacks
 
@@ -294,8 +277,6 @@ real troops, so they can attack with them or fortify.
 - **Bonuses and ownership come from real troops only.** Cluster bonuses and sector counts don't
   depend on quantum stacks.
 
----
-
 ## 9. Cards
 
 ### 9.1 Getting cards
@@ -323,14 +304,12 @@ show no sector.
 Quantum cards are kept in hand, and you can hold them on top of the 5-card hand limit. You may play
 any number during your Quantum phase. They do not count as your one Quantum action.
 
-| Card | Effect | Copies **(provisional)** |
+| Card | Effect | Copies |
 |---|---|---|
 | **Forced Measurement** | Measure any **enemy** quantum stack right now. Plan your attacks after you see the result. | 6 |
 | **Extra Split** | Do one extra split this Quantum phase. | 4 |
 
 *More Quantum cards may be added after playtesting.*
-
----
 
 ## 10. Two-player game
 
@@ -341,8 +320,6 @@ With two players, a third **neutral army** takes part:
 - Neutral sectors are attacked like any other sector.
 - Missions that target a colour can't target the neutral army. Global Domination is won by
   eliminating the other player; the neutral army doesn't need to be destroyed.
-
----
 
 ## 11. Quantum Mechanics 101
 
@@ -404,12 +381,10 @@ two differences:
 
 Future expansions (entanglement, interference) will add effects that a coin *can't* reproduce.
 
----
-
 ## 12. FAQ
 
 **Can a sector hold branches from two different stacks?**
-Not in this version. Each sector can hold at most one quantum branch **(provisional)**.
+Not in this version. Each sector can hold at most one quantum branch.
 
 **Can I put a branch on an enemy sector?**
 No. Both branches must be sectors you control, connected to the source by your own sectors.

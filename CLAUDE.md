@@ -54,9 +54,9 @@ The game will eventually be hosted on its own domain and played in the browser.
 | 18 | Turn order | Reinforce → Quantum (optional: one split *or* one self-measure) → Attack (any number, ≥1 conquest to draw a card) → Fortify (move any number of real troops). |
 | 19 | Measurement source | Hybrid: pre-fetched real-hardware (QPU) bits, then live Moth emulator, then a local fallback. The log shows the source of every measurement. |
 
-Values in `RULEBOOK.md` that were *not* agreed explicitly are marked **(provisional)**: starting
-armies, card bonuses, region bonuses, hand limit, and the limit of one superposition branch per
-sector.
+The rulebook doesn't mark unbalanced values. Starting armies, card bonuses, cluster bonuses, hand
+limit, Quantum card counts and the one-branch-per-sector limit get tuned in roadmap step 3, and the
+rulebook is updated whenever a value changes.
 
 ### Defender bonus: alternatives considered (#5)
 

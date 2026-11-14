@@ -78,11 +78,29 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
   - The engine is synchronous, so `QuantumSource` buffers bits ahead and refills in the background.
     Keep one source per server process, not one per game.
 
+## Stack and hosting
+
+- **Server-authoritative.** The game server runs the engine and Moth. Each browser only receives
+  what its seats may see (no other players' cards, missions or drawn Quantum cards; never the
+  measurement bits). Hot-seat uses the same server with several seats in one browser.
+- **Live games only.** Rooms are joined by link with a nickname; no accounts. Empty seats can be
+  bots (the `quantum` bot, the strongest in round-robin tests). Games live in memory and expire
+  after 6 idle hours.
+- **Desktop browsers only.** Small or touch screens get a "playable on desktop" notice.
+- **Web client:** React + Vite, board drawn as SVG from `design/map.yaml` (positions included), served by
+  GitHub Pages at `vincentschall.com/quantumrisk/` (`.github/workflows/pages.yml`).
+- **Game server:** Node + `ws` on a Strato VPS (VPS S, Ubuntu LTS) at `play.vincentschall.com`,
+  behind Caddy for HTTPS. `ALLOWED_ORIGINS` restricts which sites may connect.
+
 ## Code
 
-- **Language:** TypeScript. Run `npm test` for the tests, `npm run sim` for the balance experiments
-  (output goes to `sim-results/`, which is gitignored), and `npm run moth -- check` to test the Moth
-  connection (5 credits).
+- **Language:** TypeScript.
+  - `npm run dev`: game server (port 8787) and web client (port 5173) with reload.
+  - `npm test`, `npm run typecheck` (server and web).
+  - `npm run sim`: balance experiments (output in the gitignored `sim-results/`).
+  - `npm run moth -- check`: tests the Moth connection (5 credits).
+  - `npm run map:svg`: regenerates `design/map.svg` from the game's board renderer. Run it after
+    changing `design/map.yaml`.
 - `src/engine/`: the pure rules engine. No Node or DOM APIs, so the browser game and the server can
   share it.
   - `Game` holds the rules.
@@ -92,14 +110,20 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
   the buffered `RandomSource` for real games. Pure apart from `fetch` and Web Crypto.
 - `src/node/`: Node-only helpers: map loading, the bit pool file, `createHybridSource`, and the
   `npm run moth` CLI (`check`, `pool`, `fill`, `game`).
-- `src/sim/`: heuristic bots and the experiment runner.
+- `src/sim/`: heuristic bots and the experiment runner. The game server uses the same bots.
+- `src/server/`: the game server. `protocol.ts` (message and view types, shared with the web
+  client), `room.ts` (one game: seats, per-seat views, bot driver that replays bot turns event by
+  event), `main.ts` (HTTP health check and the `/ws` WebSocket).
+- `web/`: the browser client. `layout.ts` (sector boxes, packages and automatic 45° trace and
+  cable routing), `Board.tsx` (the mainboard SVG), `Game.tsx` (turn controls, hand,
+  log, hot-seat curtain), `rules.ts` (client-side previews only; the server decides), `net.ts`.
 
 ## Repo layout
 
 - `RULEBOOK.md`: player rules.
 - `design/map.md`, `map.svg`, `map.yaml`: the map, as a description, a diagram and data.
 - `design/balance.md`: balance analysis and simulation evidence.
-- `src/`, `test/`: code.
+- `src/`, `web/`, `test/`: code.
 
 ## Roadmap
 
@@ -107,11 +131,12 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 2. Map design ✓
 3. Balancing ✓ in simulation. Superposition still needs to be validated in human playtests.
 4. Moth integration ✓
-5. **Tech stack decision** (frontend, backend, multiplayer model, hosting) ← *next*
-6. Hot-seat prototype with the real quantum backend
-7. Online multiplayer
-8. In-game tutorial (first split, attacking into uncertainty, probing, cards, strategy tips)
-9. Polish and deploy
+5. Tech stack decision ✓
+6. Playable prototype ✓ (local: hot-seat, invite links, bots)
+7. **Deploy** ← *next*: VPS setup, `play.vincentschall.com`, GitHub Pages, link from the personal
+   site (and remove its old React site)
+8. Card art and visual polish; human playtests
+9. In-game tutorial (first split, attacking into uncertainty, probing, cards, strategy tips)
 10. Expansions (see variant candidates)
 
 ## Working agreements

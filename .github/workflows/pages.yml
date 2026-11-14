@@ -1,0 +1,36 @@
+# Builds the web client and publishes it with GitHub Pages (vincentschall.com/quantumrisk/).
+# Manual for now; switch to `push` once Pages is enabled and the game server is live.
+name: Deploy web client
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build:web
+        env:
+          VITE_SERVER_URL: wss://play.vincentschall.com/ws
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/web
+      - id: deployment
+        uses: actions/deploy-pages@v4

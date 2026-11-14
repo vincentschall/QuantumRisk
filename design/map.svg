@@ -1,116 +1,172 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1090" width="1200" height="1090" font-family="DejaVu Sans, Arial, sans-serif">
-<rect width="100%" height="100%" fill="#0e2a1f"/>
-<rect x="20" y="20" width="1160" height="920" rx="18" fill="#123826" stroke="#2f6b4c" stroke-width="3"/>
-<circle cx="60" cy="60" r="9" fill="#0e2a1f" stroke="#c9a94a" stroke-width="3"/>
-<circle cx="1140" cy="60" r="9" fill="#0e2a1f" stroke="#c9a94a" stroke-width="3"/>
-<circle cx="60" cy="900" r="9" fill="#0e2a1f" stroke="#c9a94a" stroke-width="3"/>
-<circle cx="1140" cy="900" r="9" fill="#0e2a1f" stroke="#c9a94a" stroke-width="3"/>
-<rect x="300" y="160" width="470" height="340" rx="12" fill="#5aa9e6" fill-opacity="0.10" stroke="#5aa9e6" stroke-width="2.5" stroke-dasharray="8 5"/>
-<text x="312" y="184" text-anchor="start" fill="#5aa9e6" font-size="19" font-weight="bold">CPU  <tspan font-size="14" font-weight="normal">+4</tspan></text>
-<rect x="795" y="140" width="280" height="380" rx="12" fill="#7fc97f" fill-opacity="0.10" stroke="#7fc97f" stroke-width="2.5" stroke-dasharray="8 5"/>
-<text x="807" y="164" text-anchor="start" fill="#7fc97f" font-size="19" font-weight="bold">RAM  <tspan font-size="14" font-weight="normal">+3</tspan></text>
-<rect x="540" y="545" width="470" height="135" rx="12" fill="#f0a35e" fill-opacity="0.10" stroke="#f0a35e" stroke-width="2.5" stroke-dasharray="8 5"/>
-<text x="998" y="569" text-anchor="end" fill="#f0a35e" font-size="19" font-weight="bold">SSD  <tspan font-size="14" font-weight="normal">+2</tspan></text>
-<rect x="90" y="705" width="870" height="175" rx="12" fill="#c08bd9" fill-opacity="0.10" stroke="#c08bd9" stroke-width="2.5" stroke-dasharray="8 5"/>
-<text x="102" y="729" text-anchor="start" fill="#c08bd9" font-size="19" font-weight="bold">GPU  <tspan font-size="14" font-weight="normal">+3</tspan></text>
-<text x="400" y="130" fill="#e8665a" font-size="17" font-weight="bold">PSU  <tspan font-size="14" font-weight="normal">+3 · cables around the board edge</tspan></text>
-<polyline points="380,230 540,230" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="380,230 380,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="380,230 540,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="540,230 540,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="380,350 540,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="690,290 540,230" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="690,290 540,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="460,455 380,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="460,455 540,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="460,455 690,290" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="850,325 922,210" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="922,210 1028,210" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="1028,210 1028,445" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="1028,445 922,445" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="922,445 850,325" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="922,210 922,445" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="620,610 760,610" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="760,610 895,600" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="760,610 895,655" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="895,600 895,655" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="190,780 420,775" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="860,780 660,775" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="420,755 420,732 860,732 860,760" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="420,775 660,775" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="420,775 540,845" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="660,775 540,845" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="130,80 330,80" fill="none" stroke="#e8665a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="130,80 130,38 1130,38 1130,300" fill="none" stroke="#e8665a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="1130,300 1130,780" fill="none" stroke="#e8665a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="130,80 48,80 48,905 1130,905 1130,780" fill="none" stroke="#e8665a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
-<polyline points="330,80 380,230" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<polyline points="690,290 850,325" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<polyline points="460,455 190,780" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<polyline points="460,455 620,610" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<polyline points="190,780 620,610" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<polyline points="1130,300 1028,445" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<polyline points="1130,780 860,780" fill="none" stroke="#ffd34d" stroke-width="6" stroke-linecap="round"/>
-<rect x="343" y="210" width="74" height="39" rx="7" fill="#0b1f17" stroke="#5aa9e6" stroke-width="4"/>
-<text x="380" y="235" fill="#f2f2f2" font-size="14" text-anchor="middle">Core 0</text>
-<rect x="503" y="210" width="74" height="39" rx="7" fill="#0b1f17" stroke="#5aa9e6" stroke-width="2"/>
-<text x="540" y="235" fill="#f2f2f2" font-size="14" text-anchor="middle">Core 1</text>
-<rect x="343" y="330" width="74" height="39" rx="7" fill="#0b1f17" stroke="#5aa9e6" stroke-width="2"/>
-<text x="380" y="355" fill="#f2f2f2" font-size="14" text-anchor="middle">Core 2</text>
-<rect x="503" y="330" width="74" height="39" rx="7" fill="#0b1f17" stroke="#5aa9e6" stroke-width="2"/>
-<text x="540" y="355" fill="#f2f2f2" font-size="14" text-anchor="middle">Core 3</text>
-<rect x="636" y="262" width="108" height="56" rx="7" fill="#0b1f17" stroke="#5aa9e6" stroke-width="4"/>
-<text x="690" y="286" fill="#f2f2f2" font-size="14" text-anchor="middle">Memory</text>
-<text x="690" y="304" fill="#f2f2f2" font-size="14" text-anchor="middle">Controller</text>
-<g transform="translate(740,260)"><path d="M0,-12 L11,-6 L11,4 Q11,12 0,16 Q-11,12 -11,4 L-11,-6 Z" fill="#ffd34d" stroke="#0b1f17" stroke-width="2"/><text x="0" y="6" font-size="11" font-weight="bold" text-anchor="middle" fill="#0b1f17">+1</text></g>
-<rect x="410" y="436" width="99" height="39" rx="7" fill="#0b1f17" stroke="#5aa9e6" stroke-width="4"/>
-<text x="460" y="460" fill="#f2f2f2" font-size="14" text-anchor="middle">PCIe Root</text>
-<rect x="796" y="306" width="108" height="39" rx="7" fill="#0b1f17" stroke="#7fc97f" stroke-width="4"/>
-<text x="850" y="330" fill="#f2f2f2" font-size="14" text-anchor="middle">Memory Bus</text>
-<rect x="881" y="190" width="82" height="39" rx="7" fill="#0b1f17" stroke="#7fc97f" stroke-width="2"/>
-<text x="922" y="215" fill="#f2f2f2" font-size="14" text-anchor="middle">DIMM A1</text>
-<rect x="987" y="190" width="82" height="39" rx="7" fill="#0b1f17" stroke="#7fc97f" stroke-width="2"/>
-<text x="1028" y="215" fill="#f2f2f2" font-size="14" text-anchor="middle">DIMM A2</text>
-<rect x="987" y="426" width="82" height="39" rx="7" fill="#0b1f17" stroke="#7fc97f" stroke-width="4"/>
-<text x="1028" y="450" fill="#f2f2f2" font-size="14" text-anchor="middle">DIMM B2</text>
-<rect x="881" y="426" width="82" height="39" rx="7" fill="#0b1f17" stroke="#7fc97f" stroke-width="2"/>
-<text x="922" y="450" fill="#f2f2f2" font-size="14" text-anchor="middle">DIMM B1</text>
-<rect x="575" y="590" width="91" height="39" rx="7" fill="#0b1f17" stroke="#f0a35e" stroke-width="4"/>
-<text x="620" y="615" fill="#f2f2f2" font-size="14" text-anchor="middle">M.2 Slot</text>
-<rect x="706" y="590" width="108" height="39" rx="7" fill="#0b1f17" stroke="#f0a35e" stroke-width="2"/>
-<text x="760" y="615" fill="#f2f2f2" font-size="14" text-anchor="middle">Controller</text>
-<rect x="862" y="580" width="65" height="39" rx="7" fill="#0b1f17" stroke="#f0a35e" stroke-width="2"/>
-<text x="895" y="605" fill="#f2f2f2" font-size="14" text-anchor="middle">Cache</text>
-<rect x="867" y="636" width="56" height="39" rx="7" fill="#0b1f17" stroke="#f0a35e" stroke-width="2"/>
-<text x="895" y="660" fill="#f2f2f2" font-size="14" text-anchor="middle">NAND</text>
-<rect x="140" y="760" width="99" height="39" rx="7" fill="#0b1f17" stroke="#c08bd9" stroke-width="4"/>
-<text x="190" y="785" fill="#f2f2f2" font-size="14" text-anchor="middle">PCIe Slot</text>
-<g transform="translate(236,758)"><path d="M0,-12 L11,-6 L11,4 Q11,12 0,16 Q-11,12 -11,4 L-11,-6 Z" fill="#ffd34d" stroke="#0b1f17" stroke-width="2"/><text x="0" y="6" font-size="11" font-weight="bold" text-anchor="middle" fill="#0b1f17">+1</text></g>
-<rect x="383" y="747" width="74" height="56" rx="7" fill="#0b1f17" stroke="#c08bd9" stroke-width="2"/>
-<text x="420" y="772" fill="#f2f2f2" font-size="14" text-anchor="middle">Shader</text>
-<text x="420" y="788" fill="#f2f2f2" font-size="14" text-anchor="middle">Array</text>
-<rect x="632" y="756" width="56" height="39" rx="7" fill="#0b1f17" stroke="#c08bd9" stroke-width="2"/>
-<text x="660" y="780" fill="#f2f2f2" font-size="14" text-anchor="middle">VRAM</text>
-<rect x="482" y="826" width="117" height="39" rx="7" fill="#0b1f17" stroke="#c08bd9" stroke-width="2"/>
-<text x="540" y="850" fill="#f2f2f2" font-size="14" text-anchor="middle">Display Out</text>
-<rect x="810" y="752" width="99" height="56" rx="7" fill="#0b1f17" stroke="#c08bd9" stroke-width="4"/>
-<text x="860" y="776" fill="#f2f2f2" font-size="14" text-anchor="middle">Power</text>
-<text x="860" y="794" fill="#f2f2f2" font-size="14" text-anchor="middle">Connector</text>
-<rect x="80" y="60" width="99" height="39" rx="7" fill="#0b1f17" stroke="#e8665a" stroke-width="2"/>
-<text x="130" y="85" fill="#f2f2f2" font-size="14" text-anchor="middle">EPS 8-Pin</text>
-<rect x="306" y="60" width="48" height="39" rx="7" fill="#0b1f17" stroke="#e8665a" stroke-width="4"/>
-<text x="330" y="85" fill="#f2f2f2" font-size="14" text-anchor="middle">VRM</text>
-<g transform="translate(350,58)"><path d="M0,-12 L11,-6 L11,4 Q11,12 0,16 Q-11,12 -11,4 L-11,-6 Z" fill="#ffd34d" stroke="#0b1f17" stroke-width="2"/><text x="0" y="6" font-size="11" font-weight="bold" text-anchor="middle" fill="#0b1f17">+1</text></g>
-<rect x="1076" y="280" width="108" height="39" rx="7" fill="#0b1f17" stroke="#e8665a" stroke-width="4"/>
-<text x="1130" y="305" fill="#f2f2f2" font-size="14" text-anchor="middle">ATX 24-Pin</text>
-<rect x="1076" y="752" width="108" height="56" rx="7" fill="#0b1f17" stroke="#e8665a" stroke-width="4"/>
-<text x="1130" y="776" fill="#f2f2f2" font-size="14" text-anchor="middle">PCIe Power</text>
-<text x="1130" y="794" fill="#f2f2f2" font-size="14" text-anchor="middle">Cable</text>
-<text x="40" y="970" fill="#f2f2f2" font-size="17" font-weight="bold">Legend</text>
-<line x1="40" y1="998" x2="100" y2="998" stroke="#c9a94a" stroke-width="3"/><text x="110" y="1003" fill="#ddd" font-size="14">trace inside a cluster</text>
-<line x1="40" y1="1028" x2="100" y2="1028" stroke="#ffd34d" stroke-width="6"/><text x="110" y="1033" fill="#ddd" font-size="14">bus between clusters (border)</text>
-<line x1="40" y1="1058" x2="100" y2="1058" stroke="#e8665a" stroke-width="3"/><text x="110" y="1063" fill="#ddd" font-size="14">PSU cable</text>
-<rect x="420" y="984" width="60" height="28" rx="6" fill="#0b1f17" stroke="#aaa" stroke-width="4"/><text x="490" y="1003" fill="#ddd" font-size="14">thick border = entry sector of its cluster</text>
-<g transform="translate(450,1040)"><path d="M0,-12 L11,-6 L11,4 Q11,12 0,16 Q-11,12 -11,4 L-11,-6 Z" fill="#ffd34d"/><text x="0" y="6" font-size="11" font-weight="bold" text-anchor="middle" fill="#0b1f17">+1</text></g><text x="490" y="1045" fill="#ddd" font-size="14">Stronghold (+1 defence)</text>
-<text x="1160" y="1063" fill="#8fb39f" font-size="13" text-anchor="end">QuantumRisk · The Mainboard · 24 sectors · 37 connections</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1340" height="1000" class="board" viewBox="-40 -40 1340 1000" role="img" aria-label="The Mainboard"><style>:root {
+  --bg: #050c09;
+  --panel: #0d1814;
+  --panel-2: #12201b;
+  --line: #22352d;
+  --text: #dfe9e4;
+  --muted: #8ea39a;
+  --gold: #d4a72c;
+  --quantum: #b993ff;
+  --good: #57d98f;
+  --bad: #ff7a6b;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--text); font: 14px/1.45 var(--sans); }
+a { color: var(--gold); }
+button, .button {
+  font: inherit; color: var(--text); background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer; text-decoration: none; display: inline-block;
+}
+button:hover:not(:disabled), .button:hover { border-color: var(--muted); }
+button:disabled { opacity: 0.4; cursor: default; }
+button.on { border-color: var(--gold); background: #2a2410; }
+button.primary, .button.primary { background: var(--gold); color: #1a1405; border-color: var(--gold); font-weight: 600; }
+button.primary.quantum { background: var(--quantum); border-color: var(--quantum); color: #1a0f2e; }
+button.primary.danger { background: #e8574a; border-color: #e8574a; color: #fff; }
+button.quantum:not(.primary) { border-color: #4a3a6e; }
+button.quantum.on { background: #241a3a; border-color: var(--quantum); }
+button.big { width: 100%; padding: 12px; font-size: 16px; margin-top: 8px; }
+input { font: inherit; color: var(--text); background: #08110d; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+.ket { font-family: var(--mono); color: var(--gold); letter-spacing: 0.02em; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
+.row.end { margin-top: 14px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.panel h3, .panel h4 { margin: 0 0 8px; }
+.panel h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+
+/* Lobby */
+.lobby { max-width: 620px; margin: 0 auto; padding: 48px 16px; display: grid; gap: 20px; }
+.title h1 { font: 700 44px var(--mono); color: var(--gold); margin: 0; letter-spacing: 0.02em; }
+.seats { display: grid; gap: 8px; margin: 12px 0; }
+.seat { display: flex; gap: 10px; align-items: center; border-left: 4px solid; padding: 6px 8px; background: var(--panel-2); border-radius: 8px; }
+.seat input { flex: 1; min-width: 0; }
+.seg { display: flex; }
+.seg button { border-radius: 0; padding: 6px 10px; }
+.seg button:first-child { border-radius: 8px 0 0 8px; }
+.seg button:last-child { border-radius: 0 8px 8px 0; }
+.dot { width: 12px; height: 12px; border-radius: 50%; flex: none; display: inline-block; }
+.field { display: grid; gap: 4px; }
+
+/* Game layout */
+.game { display: grid; grid-template-columns: minmax(0, 1fr) 360px; height: 100vh; }
+.board-wrap { position: relative; display: flex; align-items: center; justify-content: center; padding: 14px; min-width: 0; }
+.board { width: 100%; height: 100%; max-height: calc(100vh - 28px); user-select: none; }
+.side { border-left: 1px solid var(--line); padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; background: #07100c; }
+.brand { display: flex; justify-content: space-between; align-items: baseline; }
+.brand .ket { font-size: 20px; }
+.brand .meta { color: var(--muted); font-size: 12px; }
+
+/* Board drawing */
+.via { fill: #1d4634; }
+.mount { fill: #0a1a13; stroke: var(--gold); stroke-width: 3; }
+.silk { fill: #cfe3d6; opacity: 0.55; font: 600 12px var(--mono); letter-spacing: 0.12em; }
+.silk.small { font-size: 9.5px; opacity: 0.6; }
+.silk.cluster { font-size: 15px; opacity: 0.8; }
+.silk.bonus { fill: var(--gold); opacity: 0.95; font-size: 15px; }
+.package { fill: #0c1712; stroke: #4f6b5d; stroke-width: 1.5; }
+.pkg-CPU { fill: #10191a; stroke: #8a9aa0; stroke-width: 2; }
+.pkg-GPU { fill: #0d1418; stroke: #55707d; }
+.pin { fill: var(--gold); opacity: 0.8; }
+.slot-bar { fill: #0a1310; stroke: #2f4a3e; stroke-width: 1.5; }
+.housing { fill: #101314; stroke: #5a5f63; stroke-width: 1.5; }
+.trace { fill: none; stroke: #b88d24; stroke-width: 3; stroke-linejoin: round; opacity: 0.8; }
+.bus-wide { fill: none; stroke: #b88d24; stroke-width: 11; opacity: 0.25; stroke-linejoin: round; }
+.bus-core { fill: none; stroke: #e2b84a; stroke-width: 2; stroke-dasharray: 10 4; stroke-linejoin: round; }
+.cable-outer { fill: none; stroke: #0b0d0e; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
+.cable-inner { fill: none; stroke: #5d676d; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2 5; }
+.board-edge { fill: #03100a; stroke: #1c3a2c; stroke-width: 2; }
+.entangle { fill: none; stroke-width: 2.5; stroke-dasharray: 3 6; stroke-linecap: round; animation: flow 1.2s linear infinite; }
+.entangle-glow { fill: none; stroke-width: 10; opacity: 0.18; }
+@keyframes flow { to { stroke-dashoffset: -18; } }
+
+.sector { cursor: default; }
+.sector .hit { fill: transparent; }
+.sector .body { stroke-width: 2.5; transition: filter 0.15s; }
+.sector.selectable { cursor: pointer; }
+.sector.selectable .body { filter: brightness(1.25) drop-shadow(0 0 6px rgba(255, 255, 255, 0.25)); }
+.sector.selectable:hover .body { filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 255, 255, 0.45)); }
+.sector.selected .body { stroke: #fff !important; stroke-width: 4; }
+.sector-name { fill: #e6efe9; font: 600 11.5px var(--sans); }
+.troops { font: 700 21px var(--mono); }
+.troops .pending { fill: #fff; font-size: 15px; }
+.heatsink rect { fill: #9fb0b6; opacity: 0.8; }
+.branch-ring { fill: none; stroke-width: 2; stroke-dasharray: 6 5; animation: flow 1.6s linear infinite; filter: drop-shadow(0 0 6px var(--quantum)); }
+.ghost { fill: #1a1030; stroke-width: 1.5; }
+.ghost-text { fill: var(--quantum); font: 700 13px var(--mono); }
+
+.fx-attack line { stroke-width: 5; stroke-linecap: round; opacity: 0; animation: strike 2.4s ease-out; }
+.fx-text { font: 700 15px var(--sans); paint-order: stroke; stroke: #000; stroke-width: 4; opacity: 0; animation: rise 2.4s ease-out; }
+.fx-text.won { fill: var(--good); }
+.fx-text.lost { fill: var(--bad); }
+.fx-text.quantum { fill: var(--quantum); }
+.fx-collapse circle { fill: none; stroke-width: 4; opacity: 0; transform-box: fill-box; transform-origin: center; animation: collapse 2.4s ease-out; }
+.fx-vanish text { fill: var(--quantum); font: 700 34px var(--mono); opacity: 0; animation: vanish 2.4s ease-out; }
+@keyframes strike { 0% { opacity: 0; } 10% { opacity: 0.9; } 70% { opacity: 0.6; } 100% { opacity: 0; } }
+@keyframes rise { 0% { opacity: 0; transform: translateY(6px); } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(-14px); } }
+@keyframes collapse { 0% { opacity: 1; transform: scale(2.4); } 40% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+@keyframes vanish { 0% { opacity: 0.9; } 100% { opacity: 0; transform: translateY(-8px); } }
+
+/* Sidebar */
+.players { display: grid; gap: 6px; padding: 8px; }
+.player { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; border-left: 3px solid; background: var(--panel-2); }
+.player.current { outline: 1px solid var(--gold); }
+.player.dead { opacity: 0.4; text-decoration: line-through; }
+.player .pmain { flex: 1; display: grid; }
+.player .pname { font-weight: 600; }
+.player em { font-style: normal; font-weight: 400; font-size: 11px; color: var(--muted); margin-left: 4px; }
+.player .stats { font-size: 11.5px; color: var(--muted); }
+.phases { display: flex; gap: 4px; margin-bottom: 8px; }
+.phase { flex: 1; text-align: center; font-size: 11px; padding: 4px 0; border-radius: 6px; background: var(--panel-2); color: var(--muted); }
+.phase.active { background: var(--gold); color: #1a1405; font-weight: 700; }
+.turn h3 { font-size: 16px; }
+.hint { color: var(--muted); margin: 6px 0; }
+.hint.quantum, .quantum { color: var(--quantum); }
+.hint.warn { color: var(--bad); }
+.counter { font: 700 18px var(--mono); color: var(--gold); }
+.tools { display: flex; gap: 6px; }
+.slider { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; margin: 6px 0; }
+.slider input { accent-color: var(--gold); }
+.good { color: var(--good); }
+.bad { color: var(--bad); }
+.attack p, .quantum-outcomes p { margin: 4px 0; }
+.stacks { list-style: none; padding: 0; margin: 6px 0; display: grid; gap: 4px; }
+.stacks li { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+.q { color: var(--quantum); font: 700 13px var(--mono); }
+.mission { background: #1b1730; border: 1px solid #3a2f60; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+.mission p { margin: 0; }
+.cards { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.card { width: 76px; height: 98px; padding: 6px; border: 2px solid; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; position: relative; background: linear-gradient(160deg, #13201b, #0a120e); }
+.card:disabled { opacity: 1; }
+.card.on { transform: translateY(-6px); box-shadow: 0 0 0 2px #fff; }
+.card .particle { font: 700 28px var(--mono); margin-top: 6px; }
+.card .csector { font-size: 10.5px; text-align: center; line-height: 1.2; }
+.card .owned { position: absolute; top: 3px; right: 5px; font-size: 10px; color: var(--good); font-weight: 700; }
+.qcards { display: grid; gap: 6px; }
+.qcard { text-align: left; border-width: 1px; background: #170f29; }
+.invite input { width: 100%; font: 12px var(--mono); }
+.log { flex: 1; min-height: 160px; overflow: hidden; display: flex; flex-direction: column; }
+.log ol { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: grid; gap: 3px; font-size: 12px; }
+.log li { border-left: 3px solid; padding: 2px 8px; color: #c5d3cc; }
+.log li.qline { background: #160f26; color: #dccbff; }
+
+/* Overlays */
+.curtain { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(3, 8, 6, 0.86); backdrop-filter: blur(6px); z-index: 5; }
+.curtain-card { background: var(--panel); border: 2px solid; border-radius: 16px; padding: 28px 36px; text-align: center; min-width: 340px; }
+.curtain-card h2 { font-size: 32px; margin: 4px 0 18px; }
+.curtain-card .missions { text-align: left; padding-left: 18px; }
+.status, .toast { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 20; padding: 8px 16px; border-radius: 8px; }
+.status { background: #2a2410; border: 1px solid var(--gold); }
+.toast { top: auto; bottom: 16px; background: #3a1512; border: 1px solid var(--bad); cursor: pointer; }
+.desktop-notice { display: none; }
+@media (max-width: 900px), (pointer: coarse) and (max-width: 1200px) {
+  .desktop-notice { display: grid; place-items: center; position: fixed; inset: 0; z-index: 50; background: var(--bg); padding: 24px; text-align: center; }
+  .desktop-notice .ket { font-size: 30px; }
+  .desktop-notice p { font-size: 17px; max-width: 340px; margin: 16px auto; }
+}
+</style><defs><pattern id="vias" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" class="via"></circle></pattern><radialGradient id="glow" cx="50%" cy="45%" r="75%"><stop offset="0%" stop-color="#123a2a"></stop><stop offset="100%" stop-color="#071a12"></stop></radialGradient></defs><rect x="-6" y="-6" width="1272" height="932" rx="26" class="board-edge"></rect><rect width="1260" height="920" rx="22" fill="url(#glow)"></rect><rect width="1260" height="920" rx="22" fill="url(#vias)"></rect><g><circle cx="26" cy="26" r="12" class="mount"></circle><circle cx="26" cy="26" r="6" fill="#050d09"></circle></g><g><circle cx="1234" cy="26" r="12" class="mount"></circle><circle cx="1234" cy="26" r="6" fill="#050d09"></circle></g><g><circle cx="26" cy="894" r="12" class="mount"></circle><circle cx="26" cy="894" r="6" fill="#050d09"></circle></g><g><circle cx="1234" cy="894" r="12" class="mount"></circle><circle cx="1234" cy="894" r="6" fill="#050d09"></circle></g><g><g><rect x="65" y="35" width="110" height="70" rx="6" class="housing"></rect><text x="69" y="118" class="silk small">PSU · +3</text></g><g><rect x="275" y="35" width="110" height="70" rx="6" class="housing"></rect><text x="279" y="29" class="silk small">PSU · +3</text></g><g><rect x="1117.5" y="585" width="115" height="70" rx="6" class="housing"></rect><text x="1121.5" y="668" class="silk small">PSU · +3</text></g><g><rect x="1092" y="755" width="156" height="70" rx="6" class="housing"></rect><text x="1096" y="838" class="silk small">PSU · +3</text></g><g><g><rect x="291" y="169" width="8" height="7" class="pin"></rect><rect x="780.5" y="169" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="187" width="8" height="7" class="pin"></rect><rect x="780.5" y="187" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="205" width="8" height="7" class="pin"></rect><rect x="780.5" y="205" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="223" width="8" height="7" class="pin"></rect><rect x="780.5" y="223" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="241" width="8" height="7" class="pin"></rect><rect x="780.5" y="241" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="259" width="8" height="7" class="pin"></rect><rect x="780.5" y="259" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="277" width="8" height="7" class="pin"></rect><rect x="780.5" y="277" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="295" width="8" height="7" class="pin"></rect><rect x="780.5" y="295" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="313" width="8" height="7" class="pin"></rect><rect x="780.5" y="313" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="331" width="8" height="7" class="pin"></rect><rect x="780.5" y="331" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="349" width="8" height="7" class="pin"></rect><rect x="780.5" y="349" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="367" width="8" height="7" class="pin"></rect><rect x="780.5" y="367" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="385" width="8" height="7" class="pin"></rect><rect x="780.5" y="385" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="403" width="8" height="7" class="pin"></rect><rect x="780.5" y="403" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="421" width="8" height="7" class="pin"></rect><rect x="780.5" y="421" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="439" width="8" height="7" class="pin"></rect><rect x="780.5" y="439" width="8" height="7" class="pin"></rect></g><g><rect x="291" y="457" width="8" height="7" class="pin"></rect><rect x="780.5" y="457" width="8" height="7" class="pin"></rect></g><rect x="299" y="157" width="481.5" height="336" rx="10" class="package pkg-CPU"></rect><text x="303" y="148" class="silk cluster">CPU</text><text x="776.5" y="148" text-anchor="end" class="silk bonus">+4</text></g><g><rect x="145" y="909" width="8" height="9" class="pin"></rect><rect x="159" y="909" width="8" height="9" class="pin"></rect><rect x="173" y="909" width="8" height="9" class="pin"></rect><rect x="187" y="909" width="8" height="9" class="pin"></rect><rect x="201" y="909" width="8" height="9" class="pin"></rect><rect x="215" y="909" width="8" height="9" class="pin"></rect><rect x="229" y="909" width="8" height="9" class="pin"></rect><rect x="243" y="909" width="8" height="9" class="pin"></rect><rect x="257" y="909" width="8" height="9" class="pin"></rect><rect x="271" y="909" width="8" height="9" class="pin"></rect><rect x="285" y="909" width="8" height="9" class="pin"></rect><rect x="299" y="909" width="8" height="9" class="pin"></rect><rect x="313" y="909" width="8" height="9" class="pin"></rect><rect x="327" y="909" width="8" height="9" class="pin"></rect><rect x="341" y="909" width="8" height="9" class="pin"></rect><rect x="355" y="909" width="8" height="9" class="pin"></rect><rect x="369" y="909" width="8" height="9" class="pin"></rect><rect x="383" y="909" width="8" height="9" class="pin"></rect><rect x="397" y="909" width="8" height="9" class="pin"></rect><rect x="411" y="909" width="8" height="9" class="pin"></rect><rect x="425" y="909" width="8" height="9" class="pin"></rect><rect x="439" y="909" width="8" height="9" class="pin"></rect><rect x="453" y="909" width="8" height="9" class="pin"></rect><rect x="467" y="909" width="8" height="9" class="pin"></rect><rect x="481" y="909" width="8" height="9" class="pin"></rect><rect x="495" y="909" width="8" height="9" class="pin"></rect><rect x="509" y="909" width="8" height="9" class="pin"></rect><rect x="523" y="909" width="8" height="9" class="pin"></rect><rect x="537" y="909" width="8" height="9" class="pin"></rect><rect x="551" y="909" width="8" height="9" class="pin"></rect><rect x="565" y="909" width="8" height="9" class="pin"></rect><rect x="579" y="909" width="8" height="9" class="pin"></rect><rect x="593" y="909" width="8" height="9" class="pin"></rect><rect x="607" y="909" width="8" height="9" class="pin"></rect><rect x="621" y="909" width="8" height="9" class="pin"></rect><rect x="635" y="909" width="8" height="9" class="pin"></rect><rect x="649" y="909" width="8" height="9" class="pin"></rect><rect x="663" y="909" width="8" height="9" class="pin"></rect><rect x="677" y="909" width="8" height="9" class="pin"></rect><rect x="691" y="909" width="8" height="9" class="pin"></rect><rect x="705" y="909" width="8" height="9" class="pin"></rect><rect x="719" y="909" width="8" height="9" class="pin"></rect><rect x="733" y="909" width="8" height="9" class="pin"></rect><rect x="747" y="909" width="8" height="9" class="pin"></rect><rect x="761" y="909" width="8" height="9" class="pin"></rect><rect x="775" y="909" width="8" height="9" class="pin"></rect><rect x="789" y="909" width="8" height="9" class="pin"></rect><rect x="803" y="909" width="8" height="9" class="pin"></rect><rect x="817" y="909" width="8" height="9" class="pin"></rect><rect x="831" y="909" width="8" height="9" class="pin"></rect><rect x="845" y="909" width="8" height="9" class="pin"></rect><rect x="859" y="909" width="8" height="9" class="pin"></rect><rect x="873" y="909" width="8" height="9" class="pin"></rect><rect x="887" y="909" width="8" height="9" class="pin"></rect><rect x="901" y="909" width="8" height="9" class="pin"></rect><rect x="915" y="909" width="8" height="9" class="pin"></rect><rect x="929" y="909" width="8" height="9" class="pin"></rect><rect x="125" y="691" width="838" height="218" rx="14" class="package pkg-GPU"></rect><text x="129" y="682" class="silk cluster">GPU</text><text x="959" y="682" text-anchor="end" class="silk bonus">+3</text></g><g><rect x="846.5" y="147" width="334.5" height="336" rx="14" class="package pkg-RAM"></rect><text x="850.5" y="138" class="silk cluster">RAM</text><text x="1177" y="138" text-anchor="end" class="silk bonus">+3</text></g><g><rect x="581" y="520" width="438" height="165" rx="14" class="package pkg-SSD"></rect><text x="585" y="511" class="silk cluster">SSD</text><text x="1015" y="511" text-anchor="end" class="silk bonus">+2</text></g></g><g><g><path d="M330,70 L330,120 L370,160 L370,210" class="bus-wide"></path><path d="M330,70 L330,120 L370,160 L370,210" class="bus-core"></path></g><g><path d="M670,270 L772.5,270 L817.5,315 L920,315" class="bus-wide"></path><path d="M670,270 L772.5,270 L817.5,315 L920,315" class="bus-core"></path></g><g><path d="M450,440 L450,470 L210,710 L210,740" class="bus-wide"></path><path d="M450,440 L450,470 L210,710 L210,740" class="bus-core"></path></g><g><path d="M450,440 L470,440 L630,600 L650,600" class="bus-wide"></path><path d="M450,440 L470,440 L630,600 L650,600" class="bus-core"></path></g><g><path d="M210,740 L285,740 L425,600 L650,600" class="bus-wide"></path><path d="M210,740 L285,740 L425,600 L650,600" class="bus-core"></path></g><g><path d="M1175,620 L1175,557.5 L1110,492.5 L1110,430" class="bus-wide"></path><path d="M1175,620 L1175,557.5 L1110,492.5 L1110,430" class="bus-core"></path></g><g><path d="M1170,790 L1045,790 L995,740 L870,740" class="bus-wide"></path><path d="M1170,790 L1045,790 L995,740 L870,740" class="bus-core"></path></g><path d="M370,210 L530,210" class="trace"></path><path d="M370,210 L370,330" class="trace"></path><path d="M370,210 L390,210 L510,330 L530,330" class="trace"></path><path d="M530,210 L530,330" class="trace"></path><path d="M370,330 L530,330" class="trace"></path><path d="M670,270 L630,270 L570,210 L530,210" class="trace"></path><path d="M670,270 L630,270 L570,330 L530,330" class="trace"></path><path d="M450,440 L450,425 L370,345 L370,330" class="trace"></path><path d="M450,440 L450,425 L530,345 L530,330" class="trace"></path><path d="M450,440 L670,440 L670,270" class="trace"></path><path d="M920,315 L920,297.5 L1000,217.5 L1000,200" class="trace"></path><path d="M1000,200 L1110,200" class="trace"></path><path d="M1110,200 L1110,430" class="trace"></path><path d="M1110,430 L1000,430" class="trace"></path><path d="M1000,430 L1000,412.5 L920,332.5 L920,315" class="trace"></path><path d="M1000,200 L1000,430" class="trace"></path><path d="M650,600 L800,600" class="trace"></path><path d="M800,600 L857.5,600 L892.5,565 L950,565" class="trace"></path><path d="M800,600 L840,640 L950,640" class="trace"></path><path d="M950,565 L950,640" class="trace"></path><path d="M210,740 L440,740" class="trace"></path><path d="M870,740 L787.5,740 L667.5,860 L585,860" class="trace"></path><path d="M440,740 L870,740" class="trace"></path><path d="M440,740 L452.5,740 L572.5,860 L585,860" class="trace"></path><path d="M440,740 L440,860" class="trace"></path><path d="M585,860 L440,860" class="trace"></path><g><path d="M120,70 Q225,32.2 330,70" class="cable-outer"></path><path d="M120,70 Q225,32.2 330,70" class="cable-inner"></path></g><g><path d="M110,70 L110,-16 L1276,-16 L1276,610 L1175,610" class="cable-outer"></path><path d="M110,70 L110,-16 L1276,-16 L1276,610 L1175,610" class="cable-inner"></path></g><g><path d="M1175,620 Q1203.1,705.9 1170,790" class="cable-outer"></path><path d="M1175,620 Q1203.1,705.9 1170,790" class="cable-inner"></path></g><g><path d="M120,70 L120,-26 L-26,-26 L-26,946 L1286,946 L1286,790 L1170,790" class="cable-outer"></path><path d="M120,70 L120,-26 L-26,-26 L-26,946 L1286,946 L1286,790 L1170,790" class="cable-inner"></path></g></g><g></g><g class="sector" transform="translate(77,47)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">EPS 8-Pin</text></g><g class="sector" transform="translate(287,47)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><g class="heatsink" transform="translate(62, 6)"><rect x="0" y="0" width="3" height="11" rx="1"></rect><rect x="5" y="0" width="3" height="11" rx="1"></rect><rect x="10" y="0" width="3" height="11" rx="1"></rect><rect x="15" y="0" width="3" height="11" rx="1"></rect></g><text x="9" y="17" class="sector-name">VRM</text></g><g class="sector" transform="translate(327,187)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Core 0</text></g><g class="sector" transform="translate(487,187)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Core 1</text></g><g class="sector" transform="translate(327,307)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Core 2</text></g><g class="sector" transform="translate(487,307)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Core 3</text></g><g class="sector" transform="translate(587.5,247)"><rect class="hit" x="-6" y="-6" width="177" height="58" rx="12"></rect><rect width="165" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><g class="heatsink" transform="translate(141, 6)"><rect x="0" y="0" width="3" height="11" rx="1"></rect><rect x="5" y="0" width="3" height="11" rx="1"></rect><rect x="10" y="0" width="3" height="11" rx="1"></rect><rect x="15" y="0" width="3" height="11" rx="1"></rect></g><text x="9" y="17" class="sector-name">Memory Controller</text></g><g class="sector" transform="translate(407,417)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">PCIe Root</text></g><g class="sector" transform="translate(874.5,292)"><rect class="hit" x="-6" y="-6" width="103" height="58" rx="12"></rect><rect width="91" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Memory Bus</text></g><g class="sector" transform="translate(957,177)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">DIMM A1</text></g><g class="sector" transform="translate(1067,177)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">DIMM A2</text></g><g class="sector" transform="translate(957,407)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">DIMM B1</text></g><g class="sector" transform="translate(1067,407)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">DIMM B2</text></g><g class="sector" transform="translate(1129.5,597)"><rect class="hit" x="-6" y="-6" width="103" height="58" rx="12"></rect><rect width="91" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">ATX 24-Pin</text></g><g class="sector" transform="translate(607,577)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">M.2 Slot</text></g><g class="sector" transform="translate(754.5,577)"><rect class="hit" x="-6" y="-6" width="103" height="58" rx="12"></rect><rect width="91" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Controller</text></g><g class="sector" transform="translate(907,542)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Cache</text></g><g class="sector" transform="translate(907,617)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">NAND</text></g><g class="sector" transform="translate(155,717)"><rect class="hit" x="-6" y="-6" width="122" height="58" rx="12"></rect><rect width="110" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><g class="heatsink" transform="translate(86, 6)"><rect x="0" y="0" width="3" height="11" rx="1"></rect><rect x="5" y="0" width="3" height="11" rx="1"></rect><rect x="10" y="0" width="3" height="11" rx="1"></rect><rect x="15" y="0" width="3" height="11" rx="1"></rect></g><text x="9" y="17" class="sector-name">PCIe Slot</text></g><g class="sector" transform="translate(387.5,717)"><rect class="hit" x="-6" y="-6" width="117" height="58" rx="12"></rect><rect width="105" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Shader Array</text></g><g class="sector" transform="translate(807,717)"><rect class="hit" x="-6" y="-6" width="138" height="58" rx="12"></rect><rect width="126" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Power Connector</text></g><g class="sector" transform="translate(391,837)"><rect class="hit" x="-6" y="-6" width="110" height="58" rx="12"></rect><rect width="98" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">Display Out</text></g><g class="sector" transform="translate(542,837)"><rect class="hit" x="-6" y="-6" width="98" height="58" rx="12"></rect><rect width="86" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">VRAM</text></g><g class="sector" transform="translate(1104,767)"><rect class="hit" x="-6" y="-6" width="144" height="58" rx="12"></rect><rect width="132" height="46" rx="8" class="body" style="stroke:#8b939c;fill:color-mix(in srgb, #8b939c 22%, #0b1116)"></rect><text x="9" y="17" class="sector-name">PCIe Power Cable</text></g><g pointer-events="none"></g></svg>

@@ -1,0 +1,117 @@
+# QuantumRisk map v1.0 — The Mainboard (see map.md)
+# Connections are undirected; each one is listed once under `connections`.
+
+name: The Mainboard
+version: 1.0
+
+clusters:
+  CPU:
+    bonus: 4
+    sectors:
+      - Core 0
+      - Core 1
+      - Core 2
+      - Core 3
+      - Memory Controller
+      - PCIe Root
+  GPU:
+    bonus: 3
+    sectors:
+      - PCIe Slot
+      - Shader Array
+      - VRAM
+      - Display Out
+      - Power Connector
+  RAM:
+    bonus: 3
+    sectors:
+      - Memory Bus
+      - DIMM A1
+      - DIMM A2
+      - DIMM B2
+      - DIMM B1
+  SSD:
+    bonus: 2
+    sectors:
+      - M.2 Slot
+      - Controller
+      - Cache
+      - NAND
+  PSU:
+    bonus: 2
+    sectors:
+      - EPS 8-Pin
+      - VRM
+      - ATX 24-Pin
+      - PCIe Power Cable
+
+strongholds:
+  - Memory Controller
+  - PCIe Slot
+  - VRM
+
+connections:
+  - [Core 0, Core 1, trace]
+  - [Core 0, Core 2, trace]
+  - [Core 0, Core 3, trace]
+  - [Core 1, Core 3, trace]
+  - [Core 2, Core 3, trace]
+  - [Memory Controller, Core 1, trace]
+  - [Memory Controller, Core 3, trace]
+  - [PCIe Root, Core 2, trace]
+  - [PCIe Root, Core 3, trace]
+  - [PCIe Root, Memory Controller, trace]
+  - [Memory Bus, DIMM A1, trace]
+  - [DIMM A1, DIMM A2, trace]
+  - [DIMM A2, DIMM B2, trace]
+  - [DIMM B2, DIMM B1, trace]
+  - [DIMM B1, Memory Bus, trace]
+  - [DIMM A1, DIMM B1, trace]
+  - [M.2 Slot, Controller, trace]
+  - [Controller, Cache, trace]
+  - [Controller, NAND, trace]
+  - [Cache, NAND, trace]
+  - [PCIe Slot, Shader Array, trace]
+  - [Power Connector, VRAM, trace]
+  - [Shader Array, Power Connector, trace]
+  - [Shader Array, VRAM, trace]
+  - [Shader Array, Display Out, trace]
+  - [VRAM, Display Out, trace]
+  - [EPS 8-Pin, VRM, cable]
+  - [EPS 8-Pin, ATX 24-Pin, cable]
+  - [ATX 24-Pin, PCIe Power Cable, cable]
+  - [EPS 8-Pin, PCIe Power Cable, cable]
+  - [VRM, Core 0, bus]
+  - [Memory Controller, Memory Bus, bus]
+  - [PCIe Root, PCIe Slot, bus]
+  - [PCIe Root, M.2 Slot, bus]
+  - [PCIe Slot, M.2 Slot, bus]
+  - [ATX 24-Pin, DIMM B2, bus]
+  - [PCIe Power Cable, Power Connector, bus]
+
+# Layout hints for rendering (board is 1200 x 940 units)
+positions:
+  Core 0: [380, 230]
+  Core 1: [540, 230]
+  Core 2: [380, 350]
+  Core 3: [540, 350]
+  Memory Controller: [690, 290]
+  PCIe Root: [460, 455]
+  Memory Bus: [850, 325]
+  DIMM A1: [922, 210]
+  DIMM A2: [1028, 210]
+  DIMM B2: [1028, 445]
+  DIMM B1: [922, 445]
+  M.2 Slot: [620, 610]
+  Controller: [760, 610]
+  Cache: [895, 600]
+  NAND: [895, 655]
+  PCIe Slot: [190, 780]
+  Shader Array: [420, 775]
+  VRAM: [660, 775]
+  Display Out: [540, 845]
+  Power Connector: [860, 780]
+  EPS 8-Pin: [130, 80]
+  VRM: [330, 80]
+  ATX 24-Pin: [1130, 300]
+  PCIe Power Cable: [1130, 780]

@@ -8,7 +8,8 @@
     "build": "tsc -p .",
     "typecheck": "tsc -p . --noEmit",
     "test": "tsx --test test/*.test.ts",
-    "sim": "tsx src/sim/run.ts"
+    "sim": "tsx src/sim/run.ts",
+    "moth": "tsx src/node/mothCli.ts"
   },
   "dependencies": {
     "yaml": "^2.9.1"

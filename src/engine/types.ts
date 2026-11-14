@@ -62,7 +62,7 @@ export type LogEvent =
   | { type: "turnStart"; player: PlayerId; round: number; reinforcements: number }
   | { type: "trade"; player: PlayerId; troops: number; ownedSectorBonus: number; quantumCard: QuantumCardKind | null }
   | { type: "split"; player: PlayerId; stack: number; source: string; size: number; branches: [string, string] }
-  | { type: "measure"; stack: number; owner: PlayerId; cause: MeasurementCause; result: 0 | 1; sector: string; size: number }
+  | { type: "measure"; stack: number; owner: PlayerId; cause: MeasurementCause; result: 0 | 1; sector: string; size: number; source: string }
   | {
       type: "attack";
       player: PlayerId;

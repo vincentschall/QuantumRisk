@@ -103,8 +103,7 @@ Win rates of a bot that splits against an otherwise identical bot that doesn't (
 - **Splitting in Fortify** turns superposition into a real edge. You superpose troops that would
   otherwise sit idle, and stalled defensive games are halved.
 - **Splitting before attacking** costs tempo and is a net disadvantage.
-- **One split per turn** plays the same as unlimited. It keeps the Extra Split card meaningful and
-  the number of quantum measurements (Moth credits) bounded.
+- **One split per turn** plays the same as unlimited. It keeps the Extra Split card meaningful.
 
 ## Open questions for human playtests
 

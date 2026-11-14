@@ -40,7 +40,8 @@ together.
 - **Variant candidates:**
   - Quantum strike: attack from a branch, measured first.
   - Entangled stacks: two stacks that collapse in opposite directions. These need a 2-qubit Bell
-    circuit.
+    circuit. Comet can't provide one (its output is independent bits by design); `graph-v1` or our
+    own engine could.
 
 ## Quantum backend (Moth Quantum)
 
@@ -49,33 +50,48 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 - **Auth:** `Authorization: Bearer <MOTH_API_KEY>`.
   - The key is in `.env`, which is gitignored; `.env.example` is the template.
   - The key is server-side only: never log it, commit it or send it to the browser.
-- **Model:** you can't submit your own circuits; you run named engines.
+- **Model:** you run named engines, not raw circuits. Creating our own engine is possible
+  (`POST /engines`) but unexplored.
   - Submit: `POST /engines/{id}/process` with `{"params": {...}}`, which returns 202 with a `job_id`.
   - Poll: `GET /jobs/{id}/status`.
   - Fetch: `GET /jobs/{id}/result`. This returns 409 while the job is pending and 410 once the
     result has expired.
-- **`coin-toss-v1`:** a 1-qubit H + measure circuit.
-  - Params: `mode` (`emu` or `qpu`), `shots`, and an optional `backend_name`.
-  - Result: `heads`, `tails`, plus `output` (the majority). Counts only, so one measurement means
-    one job with `shots: 1`.
-  - Cost: 2 credits per run.
+- **`comet-qrng-v1`** (the default source): 20 qubits in |+⟩ (Hadamard each), 10,000 shots, then
+  an entropy check and a Toeplitz extractor.
+  - One job costs 5 credits and returns up to 65,536 bits (emu) or about 45,000 (QPU). A game uses
+    about 5–50.
+  - On a QPU the result has grade `hardware-accounted` and a CHSH Bell witness (`ibm_fez`: S ≈ 2.58).
+    Emu output is `simulator-baseline`.
+  - The certificate fields are under `result.output.entropy_report`.
+- **`coin-toss-v1`:** literally 1 qubit, H, measure. Counts only, so one bit needs one job with
+  `shots: 1` (2 credits). `CoinTossProvider` exists, but it isn't the default.
 - **Latency and limits:**
-  - `emu` (simulator) takes seconds. `qpu` (IBM hardware) can queue for minutes to hours.
-  - Poll every 2–5 s. Jobs time out after 300 s.
-  - 300 requests/min per key.
-- **Measurement source:** hybrid. A pool of pre-fetched QPU results comes first, then live `emu`,
-  then a local PRNG fallback. Every measurement is logged with its source.
+  - `emu` takes about 7 s per job. `qpu` on `ibm_fez` took 23 s, but hardware queues can take hours.
+  - Long-poll with `GET /jobs/{id}/status?wait=10s`. 300 requests/min per key.
+- **Measurement source:** hybrid, in this order:
+  1. The pool of pre-fetched QPU bits (`quantum-pool/pool.json`, gitignored, filled with
+     `npm run moth -- fill`).
+  2. A live `emu` job.
+  3. Local Web Crypto.
+  - Every bit is used exactly once. Each measurement is logged with its source (e.g.
+    `moth-qpu:ibm_fez`).
+  - The engine is synchronous, so `QuantumSource` buffers bits ahead and refills in the background.
+    Keep one source per server process, not one per game.
 
 ## Code
 
-- **Language:** TypeScript. Run `npm test` for the engine tests and `npm run sim` for the balance
-  experiments (output goes to `sim-results/`, which is gitignored).
+- **Language:** TypeScript. Run `npm test` for the tests, `npm run sim` for the balance experiments
+  (output goes to `sim-results/`, which is gitignored), and `npm run moth -- check` to test the Moth
+  connection (5 credits).
 - `src/engine/`: the pure rules engine. No Node or DOM APIs, so the browser game and the server can
   share it.
   - `Game` holds the rules.
   - `config.ts` has every tunable value.
   - Randomness is injected through `RandomSource`; quantum measurements go through its `measure()`.
-- `src/node/`: Node-only helpers (map loading).
+- `src/quantum/`: the Moth client, bit providers (Comet, coin toss, local crypto) and `QuantumSource`,
+  the buffered `RandomSource` for real games. Pure apart from `fetch` and Web Crypto.
+- `src/node/`: Node-only helpers: map loading, the bit pool file, `createHybridSource`, and the
+  `npm run moth` CLI (`check`, `pool`, `fill`, `game`).
 - `src/sim/`: heuristic bots and the experiment runner.
 
 ## Repo layout
@@ -90,8 +106,8 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 1. Rules design ✓
 2. Map design ✓
 3. Balancing ✓ in simulation. Superposition still needs to be validated in human playtests.
-4. **Moth integration** ← *current*
-5. Tech stack decision (frontend, backend, multiplayer model, hosting)
+4. Moth integration ✓
+5. **Tech stack decision** (frontend, backend, multiplayer model, hosting) ← *next*
 6. Hot-seat prototype with the real quantum backend
 7. Online multiplayer
 8. In-game tutorial (first split, attacking into uncertainty, probing, cards, strategy tips)

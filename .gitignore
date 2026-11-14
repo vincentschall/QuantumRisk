@@ -20,3 +20,6 @@ __pycache__/
 
 # Simulation output
 sim-results/
+
+# Pre-fetched quantum measurement bits (never reuse, never commit)
+quantum-pool/

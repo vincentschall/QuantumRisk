@@ -151,7 +151,9 @@ test("self-measure and forced measurement", () => {
   const m = g.selfMeasure(st.id);
   assert.throws(() => g.selfMeasure(st.id), RuleError); // once per turn
   assert.equal(m.sector, "Core 2");
+  assert.equal(m.source, "test");
   assert.equal(g.troops("Core 2"), 6);
+  assert.deepEqual(g.log.at(-1), { type: "measure", stack: 7, owner: 0, cause: "selfMeasure", result: 1, sector: "Core 2", size: 5, source: "test" });
 
   g.stacks.push({ id: 50, owner: 1, size: 4, branches: ["NAND", "Cache"] });
   assert.throws(() => g.playForcedMeasurement(50), RuleError); // no card

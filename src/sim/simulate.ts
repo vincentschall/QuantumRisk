@@ -1,4 +1,4 @@
-import { Game, NEUTRAL, seededSource, type GameConfig, type GameMap, type PlayerId } from "../engine/index.js";
+import { Game, NEUTRAL, seededSource, type GameConfig, type GameMap, type LogEvent, type PlayerId, type RandomSource } from "../engine/index.js";
 import { makeBot } from "./bots.js";
 
 export interface GameResult {
@@ -13,11 +13,12 @@ export interface GameResult {
   gambles: number;
   maxSetValue: number;
   errors: string[];
+  log: LogEvent[];
 }
 
-/** Play one bot game. `bots[i]` is the bot style for seat i. */
-export function playGame(config: GameConfig, map: GameMap, bots: string[], seed: number, maxRounds: number): GameResult {
-  const g = new Game(config, map, seededSource(seed));
+/** Play one bot game. `bots[i]` is the bot style for seat i. `rand` overrides the seeded source. */
+export function playGame(config: GameConfig, map: GameMap, bots: string[], seed: number, maxRounds: number, rand?: RandomSource): GameResult {
+  const g = new Game(config, map, rand ?? seededSource(seed));
   const players = bots.map(makeBot);
   const errors: string[] = [];
 
@@ -75,6 +76,7 @@ export function playGame(config: GameConfig, map: GameMap, bots: string[], seed:
     gambles,
     maxSetValue,
     errors,
+    log: g.log,
   };
 }
 

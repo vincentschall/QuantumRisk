@@ -23,6 +23,8 @@ export interface Measurement {
   size: number;
   result: 0 | 1;
   sector: string;
+  /** Where the measurement bit came from, e.g. "moth-qpu:ibm_fez", "moth-emu", "local-crypto". */
+  source: string;
 }
 
 export interface AttackResult {
@@ -542,11 +544,12 @@ export class Game {
 
   private measureStack(st: QuantumStack, cause: MeasurementCause): Measurement {
     const result = this.rand.measure();
+    const source = this.rand.measurementSource;
     const sector = st.branches[result];
     this.sector(sector).troops += st.size;
     this.stacks = this.stacks.filter((s) => s.id !== st.id);
-    this.log.push({ type: "measure", stack: st.id, owner: st.owner, cause, result, sector, size: st.size });
-    return { stack: st.id, owner: st.owner, size: st.size, result, sector };
+    this.log.push({ type: "measure", stack: st.id, owner: st.owner, cause, result, sector, size: st.size, source });
+    return { stack: st.id, owner: st.owner, size: st.size, result, sector, source };
   }
 
   private drawSectorCard(): SectorCard | null {

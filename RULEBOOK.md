@@ -369,8 +369,16 @@ The circuit is small:
 |0⟩ ──[ H ]──[ M ]══> 0 = branch A, 1 = branch B
 ```
 
-The game runs this circuit through the **Moth Quantum platform**, either on real quantum hardware
-or on Moth's quantum emulator. The game log tells you which one produced each result.
+The game gets its results from the **Moth Quantum platform**, either from real quantum hardware or
+from Moth's quantum emulator:
+- The platform runs this circuit on 20 qubits at once, many thousands of times.
+- It checks how much genuine randomness the hardware delivered and turns the raw results into fair
+  50/50 bits.
+- The game fetches these bits in batches before they are needed.
+- Each bit decides exactly one measurement. Nobody sees a bit before it is used, and no bit is used
+  twice.
+
+The game log shows where each result came from.
 
 ### "Isn't that just a coin flip?"
 
@@ -404,7 +412,9 @@ No. The result doesn't exist until measurement.
 Yes, but only with its real troops.
 
 **Is the measurement really done on a quantum computer?**
-It is done through the Moth Quantum platform, on real quantum hardware or on Moth's quantum
-emulator. The log shows which. If the backend is unavailable, the game uses a backup
-source and says so in the log.
+Yes, through the Moth Quantum platform: on real quantum hardware when pre-fetched hardware results
+are available, otherwise on Moth's quantum emulator. The results are measured in batches before
+they are needed, and each one is used for exactly one stack, unseen until then. The log shows the
+source of every result. If the platform is unavailable, the game uses a backup source and says so
+in the log.
 

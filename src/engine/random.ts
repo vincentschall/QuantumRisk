@@ -2,13 +2,14 @@
  * Sources of randomness. The engine never calls Math.random directly:
  * - `rng` is used for setup (dealing, missions, card shuffles),
  * - `measure` decides every quantum measurement (0 = first branch, 1 = second branch).
- * In the real game `measure` is fed by the Moth Quantum backend; in simulations both are seeded PRNGs.
+ * In the real game `measure` is fed by the Moth Quantum backend (src/quantum/); in simulations both are
+ * seeded PRNGs. `measure` is synchronous: async sources buffer bits ahead of time.
  */
 export interface RandomSource {
   rng: () => number;
   measure: () => 0 | 1;
-  /** Shown in the log for every measurement, e.g. "qpu", "emu", "local". */
-  measurementSource: string;
+  /** Source of the bit returned by the most recent `measure()` call. The engine reads it right after each call. */
+  readonly measurementSource: string;
 }
 
 /** Small, fast, seedable PRNG (mulberry32). */

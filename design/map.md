@@ -1,6 +1,6 @@
-# The Mainboard — Map v1.0
+# The Mainboard
 
-*Status: approved 2026-11-14. Machine-readable version: [`map.yaml`](map.yaml).*
+*Machine-readable version: [`map.yaml`](map.yaml).*
 
 ![The Mainboard](map.svg)
 
@@ -25,7 +25,7 @@ around the edge of the board and plug in at three places. That makes it small bu
 | **GPU** | 5 | +3 | 2: PCIe Slot ▲, Power Connector | 3 | CPU, SSD, PSU | Africa |
 | **RAM** | 5 | +3 | 2: Memory Bus, DIMM B2 | 2 | CPU, PSU | South America |
 | **SSD** | 4 | +2 | 1: M.2 Slot | 2 | CPU, GPU | Australia: a single gate |
-| **PSU** | 4 | +2 | 3: VRM ▲, ATX 24-Pin, PCIe Power Cable | 3 | CPU, RAM, GPU | Hard to hold, wraps around the board |
+| **PSU** | 4 | +3 | 3: VRM ▲, ATX 24-Pin, PCIe Power Cable | 3 | CPU, RAM, GPU | Hard to hold, wraps around the board |
 
 ▲ = Stronghold (+1 defence)
 
@@ -83,13 +83,6 @@ around the edge of the board and plug in at three places. That makes it small bu
 **Totals:** 24 sectors and 37 connections, of which 7 are buses between clusters. That's 3.1
 connections per sector on average.
 
-## History
-
-- **v0.1:** first draft.
-- **v0.2:** added three traces for density: **Core 0–Core 3**, **DIMM A1–DIMM B1** and **Shader Array–Power
-  Connector**. That raises the average from 2.8 to 3.1 connections per sector.
-- **v1.0:** approved without further changes.
-
 ## Design notes
 
 - **The memory controller sits in the CPU,** as on real hardware. The RAM's *Memory Bus* is the
@@ -105,9 +98,5 @@ connections per sector on average.
   behind both GPU entry sectors) are the safest places for reserves.
 - **Strongholds are real hardware features:** the VRM is under a heatsink, the Memory Controller
   under the CPU's heat spreader, and the PCIe Slot is steel-reinforced.
-
-## Decisions at approval
-
-- Strongholds stay at **VRM, Memory Controller and PCIe Slot**.
-- Bonuses stay at **CPU +4, GPU +3, RAM +3, SSD +2, PSU +2**. To be checked in balancing (step 3).
-- Sector names stay as they are. The in-game tutorial can explain the hardware terms.
+- **Cluster bonuses** follow the size and the number of entry sectors (see `balance.md`).
+- **Sector names are real hardware terms.** The in-game tutorial explains them.

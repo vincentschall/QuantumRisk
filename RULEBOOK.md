@@ -1,6 +1,6 @@
 # QuantumRisk — Rulebook
 
-*Version 0.1 (draft) · 2–4 players · ~30 minutes*
+*2–4 players · ~30 minutes*
 
 ---
 
@@ -51,7 +51,7 @@ QuantumRisk is a digital game. The game tracks all of the following:
   | GPU | PCIe Slot, Shader Array, VRAM, Display Out, Power Connector | +3 |
   | RAM | Memory Bus, DIMM A1, DIMM A2, DIMM B1, DIMM B2 | +3 |
   | SSD | M.2 Slot, Controller, Cache, NAND | +2 |
-  | PSU | EPS 8-Pin, VRM, ATX 24-Pin, PCIe Power Cable | +2 |
+  | PSU | EPS 8-Pin, VRM, ATX 24-Pin, PCIe Power Cable | +3 |
 
   Connections inside a cluster are called **traces** and connections between clusters are called
   **buses**. The PSU's cables run around the edge of the board. The full list of connections is in
@@ -77,11 +77,13 @@ QuantumRisk is a digital game. The game tracks all of the following:
 2. **Turn order** is randomized.
 3. **Sectors are dealt** randomly and evenly:
 
-   | Players | Sectors each | Starting troops each |
+   | Players | Sectors each | Starting troops (1st / 2nd / 3rd / 4th player) |
    |---|---|---|
-   | 2 (+ neutral) | 8 (neutral gets 8) | 22 |
-   | 3 | 8 | 20 |
-   | 4 | 6 | 18 |
+   | 2 (+ neutral) | 8 (neutral gets 8) | 22 / 24 |
+   | 3 | 8 | 20 / 21 / 22 |
+   | 4 | 6 | 18 each |
+
+   Later players get a few extra troops to make up for moving later.
 
 4. The game puts **1 real troop** on every sector you own. The neutral army puts 2 on each of its sectors.
 5. **Place your remaining starting troops.** Players take turns placing them, 3 at a time, on their
@@ -94,15 +96,15 @@ QuantumRisk is a digital game. The game tracks all of the following:
 ### Missions mode (default)
 
 You win **as soon as you complete your secret mission**, even in the middle of another player's
-turn, e.g. by surviving an attack. If two missions are completed at the same moment, the player whose turn it is wins.
-Missions are hidden from the other players.
+turn, e.g. by surviving an attack. If two missions are completed at the same moment, the player
+whose turn it is wins. Missions are hidden from the other players.
 
 Mission list:
 
 | # | Mission | Condition |
 |---|---|---|
 | 1–3 | **Cluster Lord** | Control two specific clusters: CPU + SSD, GPU + PSU, or RAM + SSD (one mission each). |
-| 4 | **Expansion** | Control 14 sectors. |
+| 4 | **Expansion** | Control **18** sectors (2 players), **16** (3 players) or **14** (4 players). |
 | 5 | **Fortress** | Control 11 sectors with at least 3 real troops on each. |
 | 6–9 | **Rival** | Eliminate a specific player colour **yourself**. If that colour is not in the game, is you, or is eliminated by another player, your mission becomes *Expansion*. |
 
@@ -140,12 +142,11 @@ Place all of these troops on sectors you control.
 
 ### Phase 2: Quantum
 
-You may do **one** of the following (or nothing):
+Both are optional:
 
-- **Split:** create a new quantum stack (see [§7.2](#72-splitting)).
-- **Self-measure:** measure one of your own quantum stacks (see [§7.4](#74-self-measurement)).
-
-Quantum cards can give you extra actions in this phase.
+- **Self-measure** one of your own quantum stacks (see [§7.4](#74-self-measurement)), at most once
+  per turn.
+- **Play Quantum cards** (see [§8.3](#83-quantum-cards)).
 
 ### Phase 3: Attack
 
@@ -154,9 +155,13 @@ If you **conquered at least one sector** this turn, you draw **one sector card**
 
 ### Phase 4: Fortify
 
-Move real troops between your sectors, as many as you like. A move must follow an unbroken chain
-of sectors you control, and every sector must keep **at least 1 real troop**. Quantum stacks can't
-be moved; only real troops can. 
+Both are optional, in any order:
+
+- **Move** real troops between your sectors, as many as you like. A move must follow an unbroken
+  chain of sectors you control, and every sector must keep **at least 1 real troop**. Quantum
+  stacks can't be moved; only real troops can.
+- **Split** once: put troops into superposition across two sectors (see [§7.2](#72-splitting)).
+  This is how you defend two places at once with the troops you didn't use this turn.
 
 ## 6. Combat
 
@@ -165,6 +170,8 @@ be moved; only real troops can.
 1. Choose a **source** sector you control and an **adjacent** enemy (or neutral) **target** sector.
 2. Choose how many real troops to commit: **N**. Then:
    - N must be **at least 3** (the *minimum attack size*).
+   - If the target holds a quantum branch, N must also be **at least the size of that quantum
+     stack**. Measuring a big stack costs a big commitment.
    - The source must keep **at least 1 real troop**, so you need at least 4 real troops in a sector
      to attack from it.
    - Only **real** troops can attack. A quantum branch on your source sector doesn't count.
@@ -183,8 +190,11 @@ be moved; only real troops can.
 - **Ties go to the defender.**
 - **Strongholds:** a defending Stronghold sector counts as **D + 1**. The +1 is only a bonus for
   this battle. It isn't a troop and can't be destroyed. Use D + 1 everywhere in the table above,
-  so the attacker also loses D + 1 if it wins. Example: 6 real troops on a Stronghold count as
-  D = 7. The attacker needs N ≥ 8, and an 8-troop attack wins, loses 7 and moves 1 in.
+  so the attacker also loses D + 1 if it wins. When an attack on a Stronghold fails, the defender
+  loses only **N − 2** troops instead of N − 1.
+  - Example: 6 real troops on a Stronghold count as D = 7. The attacker needs N ≥ 8, and an
+    8-troop attack wins, loses 7 and moves 1 in. A 7-troop attack fails: the attacker loses 7,
+    and the defender loses 5, so 1 troop remains.
 
 ### 6.3 Examples
 
@@ -222,15 +232,14 @@ If this sector is attacked, there are either **5** or **11** defenders, with a 5
 
 ### 7.2 Splitting
 
-In your Quantum phase you may **split**:
+Once per turn, in your **Fortify** phase, you may **split**. An Extra Split card allows one more:
 
 1. Choose a **source** sector and how many real troops **S** to put into superposition. The source
    must keep at least 1 real troop.
 2. Choose **two different sectors** as branches. Each must be connected to the source by an
    **unbroken chain of sectors you control**. Picture half of the troops heading off one way and half
    the other way. Each branch must also be a sector you control and must **not already hold a
-   quantum branch**. The source itself may be one of
-   the branches.
+   quantum branch**. The source itself may be one of the branches.
 3. The S troops leave the source's real count and become a quantum stack of size S, with one branch
    in each chosen sector.
 
@@ -260,9 +269,9 @@ numbers, as described in [§6.1](#61-declaring-an-attack).
 
 ### 7.4 Self-measurement
 
-In your Quantum phase you may measure one of your own stacks instead of splitting. You don't get
-to choose where it lands; 50/50 still applies. Players usually do this to get the troops back as
-real troops, so they can attack with them or fortify.
+In your Quantum phase you may measure one of your own stacks, once per turn. You don't get to
+choose where it lands; 50/50 still applies. Players usually do this to get the troops back as real
+troops, so they can attack with them this turn.
 
 ### 7.5 Key facts
 
@@ -298,14 +307,12 @@ show no sector.
 ### 8.3 Quantum cards
 
 Quantum cards are kept in hand, and you can hold them on top of the 5-card hand limit. You may play
-any number during your Quantum phase. They do not count as your one Quantum action.
+any number during your Quantum phase, in addition to your self-measurement.
 
 | Card | Effect | Copies |
 |---|---|---|
 | **Forced Measurement** | Measure any **enemy** quantum stack right now. Plan your attacks after you see the result. | 6 |
-| **Extra Split** | Do one extra split this Quantum phase. | 4 |
-
-*More Quantum cards may be added after playtesting.*
+| **Extra Split** | Do one extra split in this turn's Fortify phase. | 4 |
 
 ## 9. Two-player game
 
@@ -351,7 +358,7 @@ superposition is gone for good. If you measure it again, you get the same answer
 
 | In the game | In the quantum computer |
 |---|---|
-| Your stack is in Core 0 *or* L3 Cache | One qubit: `|0⟩` = Core 0, `|1⟩` = L3 Cache |
+| Your stack is in Core 0 *or* Core 1 | One qubit: `|0⟩` = Core 0, `|1⟩` = Core 1 |
 | You split a stack | The qubit is put into equal superposition with a **Hadamard gate (H)** |
 | Someone attacks a branch | The qubit is **measured** |
 | The stack appears in one sector | The qubit **collapsed** to 0 or 1 |
@@ -375,12 +382,10 @@ two differences:
 2. **The randomness comes from a quantum circuit.** On real hardware it is a physical quantum
    process, not a pseudo-random algorithm. The game is honest about where each result came from.
 
-Future expansions (entanglement, interference) will add effects that a coin *can't* reproduce.
-
 ## 11. FAQ
 
 **Can a sector hold branches from two different stacks?**
-Not in this version. Each sector can hold at most one quantum branch.
+No. Each sector can hold at most one quantum branch.
 
 **Can I put a branch on an enemy sector?**
 No. Both branches must be sectors you control, connected to the source by your own sectors.

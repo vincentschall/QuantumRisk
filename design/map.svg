@@ -13,7 +13,7 @@
 <text x="998" y="569" text-anchor="end" fill="#f0a35e" font-size="19" font-weight="bold">SSD  <tspan font-size="14" font-weight="normal">+2</tspan></text>
 <rect x="90" y="705" width="870" height="175" rx="12" fill="#c08bd9" fill-opacity="0.10" stroke="#c08bd9" stroke-width="2.5" stroke-dasharray="8 5"/>
 <text x="102" y="729" text-anchor="start" fill="#c08bd9" font-size="19" font-weight="bold">GPU  <tspan font-size="14" font-weight="normal">+3</tspan></text>
-<text x="400" y="130" fill="#e8665a" font-size="17" font-weight="bold">PSU  <tspan font-size="14" font-weight="normal">+2 · cables around the board edge</tspan></text>
+<text x="400" y="130" fill="#e8665a" font-size="17" font-weight="bold">PSU  <tspan font-size="14" font-weight="normal">+3 · cables around the board edge</tspan></text>
 <polyline points="380,230 540,230" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
 <polyline points="380,230 380,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
 <polyline points="380,230 540,350" fill="none" stroke="#c9a94a" stroke-width="3" stroke-opacity="0.85" stroke-linejoin="round"/>
@@ -112,5 +112,5 @@
 <line x1="40" y1="1058" x2="100" y2="1058" stroke="#e8665a" stroke-width="3"/><text x="110" y="1063" fill="#ddd" font-size="14">PSU cable</text>
 <rect x="420" y="984" width="60" height="28" rx="6" fill="#0b1f17" stroke="#aaa" stroke-width="4"/><text x="490" y="1003" fill="#ddd" font-size="14">thick border = entry sector of its cluster</text>
 <g transform="translate(450,1040)"><path d="M0,-12 L11,-6 L11,4 Q11,12 0,16 Q-11,12 -11,4 L-11,-6 Z" fill="#ffd34d"/><text x="0" y="6" font-size="11" font-weight="bold" text-anchor="middle" fill="#0b1f17">+1</text></g><text x="490" y="1045" fill="#ddd" font-size="14">Stronghold (+1 defence)</text>
-<text x="1160" y="1063" fill="#8fb39f" font-size="13" text-anchor="end">QuantumRisk · map v1.0 · 24 sectors · 37 connections</text>
+<text x="1160" y="1063" fill="#8fb39f" font-size="13" text-anchor="end">QuantumRisk · The Mainboard · 24 sectors · 37 connections</text>
 </svg>

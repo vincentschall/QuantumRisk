@@ -1,8 +1,7 @@
-# QuantumRisk map v1.0 — The Mainboard (see map.md)
+# QuantumRisk map — The Mainboard (see map.md)
 # Connections are undirected; each one is listed once under `connections`.
 
 name: The Mainboard
-version: 1.0
 
 clusters:
   CPU:
@@ -38,7 +37,7 @@ clusters:
       - Cache
       - NAND
   PSU:
-    bonus: 2
+    bonus: 3
     sectors:
       - EPS 8-Pin
       - VRM

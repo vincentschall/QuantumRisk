@@ -398,7 +398,7 @@ function TurnControls(props: {
             End turn{view.conqueredThisTurn ? " (+1 card)" : ""}
           </button>
         </div>
-        <p className="hint small">{geo.strongholds.size} Strongholds (heatsink icon) defend with +{view.strongholdBonus}.</p>
+        <p className="hint small">{geo.strongholds.size} Strongholds (gold shield) defend with +{view.strongholdBonus}.</p>
       </div>
     );
   }
@@ -414,10 +414,12 @@ function AttackPanel({ view, tool, setTool, act, strongholds }: { view: GameView
   const min = minCommit(view, to);
   const n = tool.committed ?? max;
   const extraMax = Math.max(0, max - n);
-  const extra = Math.min(tool.moveExtra ?? 0, extraMax);
+  const stacks = stacksAt(view, to);
+  // Without a quantum stack in the target the result is known in advance, so "attack with 4, move 2
+  // more in" is the same as "attack with 6": only one slider is needed.
+  const extra = stacks.length ? Math.min(tool.moveExtra ?? 0, extraMax) : 0;
   const defenders = view.sectors[to]?.troops ?? 0;
   const stronghold = strongholds.has(to);
-  const stacks = stacksAt(view, to);
   const outcome = (d: number) => battle(n, d, stronghold, view.strongholdBonus, extra);
   const line = (o: ReturnType<typeof outcome>) =>
     o.won ? `you take it: lose ${o.attackerLosses}, move in ${o.movedIn}` : `it holds: you lose ${o.attackerLosses}, they lose ${o.defenderLosses}`;
@@ -436,8 +438,13 @@ function AttackPanel({ view, tool, setTool, act, strongholds }: { view: GameView
         <b>{from}</b> → <b>{to}</b>: {defenders} defender{defenders === 1 ? "" : "s"}
         {stronghold ? ` +${view.strongholdBonus} Stronghold` : ""}
       </p>
-      <Slider value={n} min={min} max={max} onChange={(c) => setTool({ ...tool, committed: c })} label="attackers" />
-      {extraMax > 0 && <Slider value={extra} min={0} max={extraMax} onChange={(m) => setTool({ ...tool, moveExtra: m })} label="extra to move in if you win" />}
+      <Slider value={n} min={min} max={max} onChange={(c) => setTool({ ...tool, committed: c })} label={stacks.length ? "attackers (lost if it holds)" : "troops to send"} />
+      {stacks.length > 0 && extraMax > 0 && (
+        <>
+          <Slider value={extra} min={0} max={extraMax} onChange={(m) => setTool({ ...tool, moveExtra: m })} label="follow-up (only if you win)" />
+          <p className="hint small">The stack may be here, so the result isn't known yet. Attackers fight and die if the sector holds. Follow-up troops stay home in that case and only move in after a win.</p>
+        </>
+      )}
       {stacks.length === 0 ? (
         <p className={outcome(defenders).won ? "good" : "bad"}>Result: {line(outcome(defenders))}</p>
       ) : (
@@ -506,6 +513,8 @@ function Hand(props: {
   const { view, seat, canTrade, canPlay, tradeSel, setTradeSel, act, setTool } = props;
   const p = view.players[seat]!;
   const cards = p.cards ?? [];
+  const [peek, setPeek] = useState<Peek | null>(null);
+  const hover = (pk: Peek) => ({ onMouseEnter: () => setPeek(pk), onMouseLeave: () => setPeek(null) });
   const isSet = (sel: number[]) => (p.sets ?? []).some((s) => s.length === sel.length && s.every((i) => sel.includes(i)));
   return (
     <section className="panel hand">
@@ -528,9 +537,9 @@ function Hand(props: {
               key={i}
               className={`card ${on ? "on" : ""}`}
               disabled={!canTrade}
-              style={{ borderColor: pt.color }}
+              style={{ borderColor: pt.color, backgroundImage: `url(${art(c.particle)})` }}
               onClick={() => setTradeSel(on ? tradeSel.filter((x) => x !== i) : tradeSel.length < 3 ? [...tradeSel, i] : tradeSel)}
-              title={pt.name}
+              {...hover(sectorPeek(c.particle, c.sector))}
             >
               <span className="particle" style={{ color: pt.color }}>
                 {pt.symbol}
@@ -561,15 +570,76 @@ function Hand(props: {
             className="qcard"
             disabled={!canPlay || (q === "forcedMeasurement" && !view.stacks.some((s) => s.owner !== seat))}
             onClick={() => (q === "forcedMeasurement" ? setTool({ kind: "forced" }) : act({ type: "extraSplit" }))}
-            style={{ borderColor: QUANTUM }}
+            style={{ borderColor: QUANTUM, backgroundImage: `url(${art(q === "forcedMeasurement" ? "forced-measurement" : "extra-split")})` }}
+            {...hover(QUANTUM_PEEK[q]!)}
           >
-            {q === "forcedMeasurement" ? "⟨M⟩ Forced Measurement" : "ψ Extra Split"}
+            <span className="qname">{q === "forcedMeasurement" ? "Forced Measure\u00ADment" : "Extra Split"}</span>
           </button>
         ))}
       </div>
+      {peek && (
+        <div className="peek">
+          <img src={art(peek.art)} alt="" style={{ borderColor: peek.color }} />
+          <div className="peek-text">
+            <h2 style={{ color: peek.color }}>{peek.title}</h2>
+            {peek.sub && <p className="peek-sub">{peek.sub}</p>}
+            <p className="peek-effect">{peek.effect}</p>
+            <p className="peek-fact">{peek.fact}</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
+
+interface Peek {
+  art: string;
+  color: string;
+  title: string;
+  sub?: string;
+  effect: string;
+  fact: string;
+}
+
+const PARTICLE_FACT: Record<string, string> = {
+  proton: "Positively charged and found in every atomic nucleus. The number of protons decides which element an atom is.",
+  neutron: "Electrically neutral. Together with protons it makes up the nucleus, held together by the strong force.",
+  electron: "Negatively charged and about 1,836 times lighter than a proton. Electrons moving through the traces of this board are its electric current.",
+  photon: "A particle of light with no mass and no charge. Photons carry the electromagnetic force, and a single photon can be put into superposition.",
+};
+
+function sectorPeek(particle: string, sector: string | null | undefined): Peek {
+  const pt = PARTICLE[particle as keyof typeof PARTICLE];
+  return {
+    art: particle,
+    color: pt.color,
+    title: `${pt.name.replace(" (wild)", "")} ${pt.symbol}`,
+    sub: sector ? `Sector: ${sector}` : "Wild card",
+    effect: sector
+      ? `Trade three of a kind (+4 troops) or one of each particle (+6). If you control ${sector} when you trade, +2 troops there.`
+      : "Counts as any particle in a set. Three of a kind gives +4 troops, one of each +6.",
+    fact: PARTICLE_FACT[particle] ?? "",
+  };
+}
+
+const QUANTUM_PEEK: Record<string, Peek> = {
+  forcedMeasurement: {
+    art: "forced-measurement",
+    color: QUANTUM,
+    title: "Forced Measurement",
+    effect: "Quantum phase: measure any enemy quantum stack now, then plan your attacks knowing where it is.",
+    fact: "Measuring a superposition forces it into one definite result, and after that the superposition is gone. Measuring again gives the same answer.",
+  },
+  extraSplit: {
+    art: "extra-split",
+    color: QUANTUM,
+    title: "Extra Split",
+    effect: "Allows one more split in this turn's Fortify phase.",
+    fact: "A beam splitter sends a single photon into two paths at once. Until it is detected, it is in a superposition of both paths, not secretly in one of them.",
+  },
+};
+
+const art = (name: string) => `${import.meta.env.BASE_URL}art/${name}.webp`;
 
 function Log({ view, name }: { view: GameView; name(p: PlayerId): string }) {
   const lines = useMemo(() => {

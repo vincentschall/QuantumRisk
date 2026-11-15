@@ -42,7 +42,11 @@ input { font: inherit; color: var(--text); background: #08110d; border: 1px soli
 
 /* Lobby */
 .lobby { max-width: 620px; margin: 0 auto; padding: 48px 16px; display: grid; gap: 20px; }
-.title h1 { font: 700 44px var(--mono); color: var(--gold); margin: 0; letter-spacing: 0.02em; }
+.title { height: 240px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg) center 40% / cover no-repeat; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 20px 22px; }
+.title::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 12, 9, 0.9) 0%, rgba(5, 12, 9, 0.55) 45%, rgba(5, 12, 9, 0) 75%); }
+.title > * { position: relative; }
+.title h1 { font: 700 44px var(--mono); color: var(--gold); margin: 0; letter-spacing: 0.02em; text-shadow: 0 2px 12px #000; }
+.title p { margin: 4px 0 0; color: #d9cdf5; text-shadow: 0 1px 8px #000; }
 .seats { display: grid; gap: 8px; margin: 12px 0; }
 .seat { display: flex; gap: 10px; align-items: center; border-left: 4px solid; padding: 6px 8px; background: var(--panel-2); border-radius: 8px; }
 .seat input { flex: 1; min-width: 0; }
@@ -68,7 +72,7 @@ input { font: inherit; color: var(--text); background: #08110d; border: 1px soli
 .silk { fill: #cfe3d6; opacity: 0.55; font: 600 12px var(--mono); letter-spacing: 0.12em; }
 .silk.small { font-size: 9.5px; opacity: 0.6; }
 .silk.cluster { font-size: 15px; opacity: 0.8; }
-.silk.bonus { fill: var(--gold); opacity: 0.95; font-size: 15px; }
+.silk .bonus { fill: var(--gold); }
 .package { fill: #0c1712; stroke: #4f6b5d; stroke-width: 1.5; }
 .pkg-CPU { fill: #10191a; stroke: #8a9aa0; stroke-width: 2; }
 .pkg-GPU { fill: #0d1418; stroke: #55707d; }
@@ -95,7 +99,8 @@ input { font: inherit; color: var(--text); background: #08110d; border: 1px soli
 .sector-name { fill: #e6efe9; font: 600 11.5px var(--sans); }
 .troops { font: 700 21px var(--mono); }
 .troops .pending { fill: #fff; font-size: 15px; }
-.heatsink rect { fill: #9fb0b6; opacity: 0.8; }
+.shield path { fill: var(--gold); stroke: #1a1405; stroke-width: 0.8; }
+.shield .shield-mark { fill: none; stroke: #1a1405; stroke-width: 2; stroke-linecap: round; }
 .branch-ring { fill: none; stroke-width: 2; stroke-dasharray: 6 5; animation: flow 1.6s linear infinite; filter: drop-shadow(0 0 6px var(--quantum)); }
 .ghost { fill: #1a1030; stroke-width: 1.5; }
 .ghost-text { fill: var(--quantum); font: 700 13px var(--mono); }
@@ -141,14 +146,16 @@ input { font: inherit; color: var(--text); background: #08110d; border: 1px soli
 .mission { background: #1b1730; border: 1px solid #3a2f60; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
 .mission p { margin: 0; }
 .cards { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-.card { width: 76px; height: 98px; padding: 6px; border: 2px solid; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; position: relative; background: linear-gradient(160deg, #13201b, #0a120e); }
-.card:disabled { opacity: 1; }
+.card, .qcard { width: 52px; height: 78px; padding: 0; border: 2px solid; border-radius: 7px; position: relative; overflow: hidden; background: #0a120e center / cover no-repeat; transition: transform 0.12s, box-shadow 0.12s; }
+.card:disabled, .qcard:disabled { opacity: 1; cursor: default; }
+.qcard:disabled { filter: saturate(0.35) brightness(0.6); }
 .card.on { transform: translateY(-6px); box-shadow: 0 0 0 2px #fff; }
-.card .particle { font: 700 28px var(--mono); margin-top: 6px; }
-.card .csector { font-size: 10.5px; text-align: center; line-height: 1.2; }
-.card .owned { position: absolute; top: 3px; right: 5px; font-size: 10px; color: var(--good); font-weight: 700; }
-.qcards { display: grid; gap: 6px; }
-.qcard { text-align: left; border-width: 1px; background: #170f29; }
+.card:not(:disabled):hover, .qcard:not(:disabled):hover { transform: translateY(-3px); }
+.card .particle { position: absolute; top: 2px; left: 5px; font: 700 15px var(--mono); text-shadow: 0 0 6px #000, 0 0 2px #000; }
+.card .csector, .qcard .qname { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 2px 4px; font-size: 9px; line-height: 1.15; text-align: center; color: #fff; background: linear-gradient(transparent, rgba(0, 0, 0, 0.85) 45%); }
+.card .owned { position: absolute; top: 3px; right: 4px; font-size: 10px; color: var(--good); font-weight: 700; background: rgba(0, 0, 0, 0.7); border-radius: 4px; padding: 0 3px; }
+.qcards { display: flex; flex-wrap: wrap; gap: 6px; }
+.qcard .qname { color: #e4d6ff; font-size: 8.5px; }
 .invite input { width: 100%; font: 12px var(--mono); }
 .log { flex: 1; min-height: 160px; overflow: hidden; display: flex; flex-direction: column; }
 .log ol { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: grid; gap: 3px; font-size: 12px; }
@@ -169,3 +176,13 @@ input { font: inherit; color: var(--text); background: #08110d; border: 1px soli
   .desktop-notice .ket { font-size: 30px; }
   .desktop-notice p { font-size: 17px; max-width: 340px; margin: 16px auto; }
 }
+
+/* Card preview on hover: covers the board, never takes the mouse */
+.peek { position: fixed; top: 0; bottom: 0; left: 0; right: 360px; z-index: 20; pointer-events: none; display: flex; align-items: center; justify-content: center; gap: 40px; padding: 40px; background: rgba(3, 8, 6, 0.82); backdrop-filter: blur(5px); animation: peek-in 0.12s ease-out; }
+.peek img { height: min(78vh, 720px); aspect-ratio: 2 / 3; border: 3px solid; border-radius: 18px; box-shadow: 0 20px 60px #000; }
+.peek-text { max-width: 340px; }
+.peek-text h2 { margin: 0 0 4px; font: 700 30px var(--mono); }
+.peek-sub { margin: 0 0 18px; color: var(--muted); font-size: 15px; }
+.peek-effect { font-size: 16px; line-height: 1.5; margin: 0 0 16px; }
+.peek-fact { color: #b9c9c1; font-style: italic; line-height: 1.5; margin: 0; padding-left: 12px; border-left: 2px solid var(--line); }
+@keyframes peek-in { from { opacity: 0; } to { opacity: 1; } }

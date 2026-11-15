@@ -60,19 +60,22 @@ test("a full game can be played through the room", async () => {
   for (let i = 0; i < 5000 && !g.isOver; i++) {
     const p = g.current;
     const mine = g.ownedSectors(p);
+    // Reinforce a sector on the front line; the strongest one, so attacks can snowball.
+    const front = mine.filter((s) => g.neighbors(s).some((n) => g.owner(n) !== p));
+    const base = (front.length ? front : mine).reduce((a, b) => (g.troops(a) >= g.troops(b) ? a : b));
     if (g.phase === "setup") await r.act(p, { type: "setupPlace", placements: { [mine[0]!]: Math.min(3, g.setupRemaining[p]!) } });
     else if (g.phase === "reinforce") {
       const sets = g.findSets(p);
       if (g.players[p]!.cards.length >= 5) await r.act(p, { type: "trade", indices: sets[0] as [number, number, number] });
-      else if (g.reinforcementsLeft > 0) await r.act(p, { type: "place", placements: { [mine[0]!]: g.reinforcementsLeft } });
+      else if (g.reinforcementsLeft > 0) await r.act(p, { type: "place", placements: { [base]: g.reinforcementsLeft } });
       else await r.act(p, { type: "endPhase" });
     } else if (g.phase === "quantum") await r.act(p, { type: "endPhase" });
     else {
-      // Attack the weakest adjacent enemy from the strongest sector, else end the turn.
-      const from = mine.reduce((a, b) => (g.troops(a) >= g.troops(b) ? a : b));
-      const to = g.neighbors(from).filter((n) => g.owner(n) !== p).sort((a, b) => g.troops(a) - g.troops(b))[0];
-      if (g.phase === "attack" && to && g.troops(from) - 1 >= g.minCommit(to) && g.troops(from) - 1 > g.troops(to) + 1)
-        await r.act(p, { type: "attack", from, to, committed: g.troops(from) - 1, moveExtra: 0 });
+      // Make any attack that surely wins (+1 covers Strongholds), else end the turn.
+      const attack = mine
+        .flatMap((from) => g.neighbors(from).filter((to) => g.owner(to) !== p).map((to) => ({ from, to, n: g.troops(from) - 1 })))
+        .find(({ to, n }) => n >= g.minCommit(to) && n > g.troops(to) + 1);
+      if (g.phase === "attack" && attack) await r.act(p, { type: "attack", from: attack.from, to: attack.to, committed: attack.n, moveExtra: 0 });
       else await r.act(p, { type: "endTurn" });
     }
   }

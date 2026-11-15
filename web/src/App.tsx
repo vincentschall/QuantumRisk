@@ -63,8 +63,9 @@ export function App() {
 
 function Title() {
   return (
-    <header className="title">
+    <header className="title" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}art/title.webp)` }}>
       <h1>QuantumRisk</h1>
+      <p>Conquer the mainboard. Your armies live in superposition.</p>
     </header>
   );
 }

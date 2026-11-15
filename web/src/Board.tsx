@@ -79,14 +79,30 @@ function Packages({ lay, map }: { lay: Layout; map: BoardMap }) {
           {name === "GPU" &&
             Array.from({ length: Math.floor((w - 40) / 14) }, (_, i) => <rect key={i} x={x + 20 + i * 14} y={y + h} width="8" height="9" className="pin" />)}
           <rect x={x} y={y} width={w} height={h} rx={name === "CPU" ? 10 : 14} className={`package pkg-${name}`} />
-          <text x={x + 4} y={y - 9} className="silk cluster">
-            {name}
-          </text>
-          <text x={x + w - 4} y={y - 9} textAnchor="end" className="silk bonus">
-            +{bonus}
-          </text>
         </g>
       ))}
+      {lay.packages.map(({ name, bonus, rect: { x, y, w } }) => {
+        // Bonus in the top-right corner, unless another package covers that spot: then beside the name.
+        const cx = x + w - 4;
+        const covered = lay.packages.some((o) => o.name !== name && cx >= o.rect.x && cx - 24 <= o.rect.x + o.rect.w && y - 24 <= o.rect.y + o.rect.h && y >= o.rect.y);
+        return (
+          <g key={name}>
+            <text x={x + 4} y={y - 9} className="silk cluster">
+              {name}
+              {covered && (
+                <tspan className="bonus" dx="10">
+                  +{bonus}
+                </tspan>
+              )}
+            </text>
+            {!covered && (
+              <text x={cx} y={y - 9} textAnchor="end" className="silk cluster">
+                <tspan className="bonus">+{bonus}</tspan>
+              </text>
+            )}
+          </g>
+        );
+      })}
     </g>
   );
 }
@@ -155,10 +171,10 @@ function Sector(props: {
       {props.stack && <rect x="-7" y="-7" width={NW + 14} height={NH + 14} rx="13" className="branch-ring" stroke={colorOf(props.stack.owner)} />}
       <rect width={NW} height={NH} rx="8" className="body" style={{ stroke: color, fill: `color-mix(in srgb, ${color} 22%, #0b1116)` }} />
       {props.stronghold && (
-        <g className="heatsink" transform={`translate(${NW - 24}, 6)`}>
-          {[0, 5, 10, 15].map((i) => (
-            <rect key={i} x={i} y="0" width="3" height="11" rx="1" />
-          ))}
+        <g className="shield" transform={`translate(${NW - 23}, 5)`}>
+          <title>Stronghold: defends with +1</title>
+          <path d="M8 0 L16 3 V9 C16 14 12.5 17.5 8 19 C3.5 17.5 0 14 0 9 V3 Z" />
+          <path d="M8 4 V15 M4 8.5 H12" className="shield-mark" />
         </g>
       )}
       <text x="9" y="17" className="sector-name">

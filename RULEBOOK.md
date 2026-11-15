@@ -1,5 +1,7 @@
 # QuantumRisk — Rulebook
 
+![QuantumRisk](web/public/art/title.webp)
+
 *2–4 players · ~30 minutes*
 
 ---
@@ -47,14 +49,14 @@ QuantumRisk is a digital game. The game tracks all of the following:
 
   | Cluster | Sectors | Cluster bonus |
   |---|---|---|
-  | CPU | Core 0, Core 1, Core 2, Core 3, Memory Controller, PCIe Root | +4 |
-  | GPU | PCIe Slot, Shader Array, VRAM, Display Out, Power Connector | +3 |
+  | CPU | Core 0, Core 1, Core 2, Core 3, Memory Controller, Root Complex | +4 |
+  | GPU | PCIe x16, Shader Array, VRAM, Display Out, Power Connector | +3 |
   | RAM | Memory Bus, DIMM A1, DIMM A2, DIMM B1, DIMM B2 | +3 |
-  | SSD | M.2 Slot, Controller, Cache, NAND | +2 |
-  | PSU | EPS 8-Pin, VRM, ATX 24-Pin, PCIe Power Cable | +3 |
+  | SSD | M.2 Slot, Flash Controller, DRAM Cache, NAND | +2 |
+  | Power | EPS 8-Pin, VRM, ATX 24-Pin, PCIe Power Cable | +3 |
 
   Connections inside a cluster are called **traces** and connections between clusters are called
-  **buses**. The PSU's cables run around the edge of the board. The full list of connections is in
+  **buses**. The Power cluster's cables run around the edge of the board. The full list of connections is in
   [`design/map.md`](design/map.md).
 
 - **Troops:** your armies, one colour per player. A sector shows two numbers:
@@ -65,7 +67,7 @@ QuantumRisk is a digital game. The game tracks all of the following:
   **electron** (8 of each). There are also 2 **photon** wild cards.
 - **Quantum cards:** special-action cards (see [§8](#8-cards)).
 - **Mission cards:** secret objectives (see [§4](#4-how-to-win)).
-- **Strongholds:** **VRM**, **Memory Controller** and **PCIe Slot**. They give **+1 defence** (see
+- **Strongholds:** **VRM**, **Memory Controller** and **PCIe x16**. They give **+1 defence** (see
   [§6.2](#62-resolving-the-battle)).
 - **The quantum backend:** every superposition is measured by a quantum circuit run through the
   Moth Quantum platform, either on real quantum hardware or on Moth's quantum emulator. The game log
@@ -103,7 +105,7 @@ Mission list:
 
 | # | Mission | Condition |
 |---|---|---|
-| 1–3 | **Cluster Lord** | Control two specific clusters: CPU + SSD, GPU + PSU, or RAM + SSD (one mission each). |
+| 1–3 | **Cluster Lord** | Control two specific clusters: CPU + SSD, GPU + Power, or RAM + SSD (one mission each). |
 | 4 | **Expansion** | Control **18** sectors (2 players), **16** (3 players) or **14** (4 players). |
 | 5 | **Fortress** | Control 11 sectors with at least 3 real troops on each. |
 | 6–9 | **Rival** | Eliminate a specific player colour **yourself**. If that colour is not in the game, is you, or is eliminated by another player, your mission becomes *Expansion*. |
@@ -290,6 +292,12 @@ At the end of any turn in which you conquered at least one sector, draw **one se
 The maximum hand size is 5. At 5 or more cards you must trade at the start of your next Reinforce
 phase.
 
+Each sector card shows a particle and, except for photons, a sector of the board:
+
+| <img src="web/public/art/proton.webp" width="120" alt="Proton"> | <img src="web/public/art/neutron.webp" width="120" alt="Neutron"> | <img src="web/public/art/electron.webp" width="120" alt="Electron"> | <img src="web/public/art/photon.webp" width="120" alt="Photon"> |
+|:---:|:---:|:---:|:---:|
+| Proton p⁺ | Neutron n⁰ | Electron e⁻ | Photon γ (wild) |
+
 ### 8.2 Playing sector cards (Reinforce phase only)
 
 | Play | Requirement | Reward |
@@ -313,6 +321,10 @@ any number during your Quantum phase, in addition to your self-measurement.
 |---|---|---|
 | **Forced Measurement** | Measure any **enemy** quantum stack right now. Plan your attacks after you see the result. | 6 |
 | **Extra Split** | Do one extra split in this turn's Fortify phase. | 4 |
+
+| <img src="web/public/art/forced-measurement.webp" width="120" alt="Forced Measurement"> | <img src="web/public/art/extra-split.webp" width="120" alt="Extra Split"> |
+|:---:|:---:|
+| Forced Measurement | Extra Split |
 
 ## 9. Two-player game
 

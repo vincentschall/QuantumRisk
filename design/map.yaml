@@ -12,11 +12,11 @@ clusters:
       - Core 2
       - Core 3
       - Memory Controller
-      - PCIe Root
+      - Root Complex
   GPU:
     bonus: 3
     sectors:
-      - PCIe Slot
+      - PCIe x16
       - Shader Array
       - VRAM
       - Display Out
@@ -33,10 +33,10 @@ clusters:
     bonus: 2
     sectors:
       - M.2 Slot
-      - Controller
-      - Cache
+      - Flash Controller
+      - DRAM Cache
       - NAND
-  PSU:
+  Power:
     bonus: 3
     sectors:
       - EPS 8-Pin
@@ -46,7 +46,7 @@ clusters:
 
 strongholds:
   - Memory Controller
-  - PCIe Slot
+  - PCIe x16
   - VRM
 
 connections:
@@ -57,20 +57,20 @@ connections:
   - [Core 2, Core 3, trace]
   - [Memory Controller, Core 1, trace]
   - [Memory Controller, Core 3, trace]
-  - [PCIe Root, Core 2, trace]
-  - [PCIe Root, Core 3, trace]
-  - [PCIe Root, Memory Controller, trace]
+  - [Root Complex, Core 2, trace]
+  - [Root Complex, Core 3, trace]
+  - [Root Complex, Memory Controller, trace]
   - [Memory Bus, DIMM A1, trace]
   - [DIMM A1, DIMM A2, trace]
   - [DIMM A2, DIMM B2, trace]
   - [DIMM B2, DIMM B1, trace]
   - [DIMM B1, Memory Bus, trace]
   - [DIMM A1, DIMM B1, trace]
-  - [M.2 Slot, Controller, trace]
-  - [Controller, Cache, trace]
-  - [Controller, NAND, trace]
-  - [Cache, NAND, trace]
-  - [PCIe Slot, Shader Array, trace]
+  - [M.2 Slot, Flash Controller, trace]
+  - [Flash Controller, DRAM Cache, trace]
+  - [Flash Controller, NAND, trace]
+  - [DRAM Cache, NAND, trace]
+  - [PCIe x16, Shader Array, trace]
   - [Power Connector, VRAM, trace]
   - [Shader Array, Power Connector, trace]
   - [Shader Array, VRAM, trace]
@@ -82,9 +82,9 @@ connections:
   - [EPS 8-Pin, PCIe Power Cable, cable]
   - [VRM, Core 0, bus]
   - [Memory Controller, Memory Bus, bus]
-  - [PCIe Root, PCIe Slot, bus]
-  - [PCIe Root, M.2 Slot, bus]
-  - [PCIe Slot, M.2 Slot, bus]
+  - [Root Complex, PCIe x16, bus]
+  - [Root Complex, M.2 Slot, bus]
+  - [PCIe x16, M.2 Slot, bus]
   - [ATX 24-Pin, DIMM B2, bus]
   - [PCIe Power Cable, Power Connector, bus]
 
@@ -97,7 +97,7 @@ positions:
   Core 2: [370, 330]
   Core 3: [530, 330]
   Memory Controller: [670, 270]
-  PCIe Root: [450, 440]
+  Root Complex: [450, 440]
   Memory Bus: [920, 315]
   DIMM A1: [1000, 200]
   DIMM A2: [1110, 200]
@@ -105,10 +105,10 @@ positions:
   DIMM B2: [1110, 430]
   ATX 24-Pin: [1175, 620]
   M.2 Slot: [650, 600]
-  Controller: [800, 600]
-  Cache: [950, 565]
+  Flash Controller: [800, 600]
+  DRAM Cache: [950, 565]
   NAND: [950, 640]
-  PCIe Slot: [210, 740]
+  PCIe x16: [210, 740]
   Shader Array: [440, 740]
   Power Connector: [870, 740]
   Display Out: [440, 860]

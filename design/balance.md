@@ -35,7 +35,7 @@ about 1 across all six continents. The cluster bonuses follow the same pattern:
 | GPU | 5 | 2 | 3.0 | +3 |
 | RAM | 5 | 2 | 3.0 | +3 |
 | SSD | 4 | 1 | 2.1 | +2 |
-| PSU | 4 | 3 | 3.0 | +3 |
+| Power | 4 | 3 | 3.0 | +3 |
 
 ## Income and cards
 
@@ -55,7 +55,7 @@ games, because there were no stalemates to break. It only added big late-game sw
 ## Starting deal
 
 Random dealing rarely hands someone a complete cluster before turn 1 (200,000 simulated deals):
-3.2% with 2 players, 4.7% with 3 and 1.2% with 4, almost always the SSD or the PSU. That's
+3.2% with 2 players, 4.7% with 3 and 1.2% with 4, almost always the SSD or Power. That's
 acceptable.
 
 ## Seat compensation and the Expansion mission

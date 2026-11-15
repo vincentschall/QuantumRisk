@@ -33,8 +33,8 @@ function arena(mine: Record<string, number>, theirs: Record<string, number> = {}
 test("map: 24 sectors, 37 connections, 3 strongholds", () => {
   assert.equal(map.sectors.length, 24);
   assert.equal(map.def.connections.length, 37);
-  assert.deepEqual([...map.strongholds].sort(), ["Memory Controller", "PCIe Slot", "VRM"]);
-  assert.equal(map.bonus.get("PSU"), 3);
+  assert.deepEqual([...map.strongholds].sort(), ["Memory Controller", "PCIe x16", "VRM"]);
+  assert.equal(map.bonus.get("Power"), 3);
 });
 
 test("setup: dealing and starting troops", () => {
@@ -155,7 +155,7 @@ test("self-measure and forced measurement", () => {
   assert.equal(g.troops("Core 2"), 6);
   assert.deepEqual(g.log.at(-1), { type: "measure", stack: 7, owner: 0, cause: "selfMeasure", result: 1, sector: "Core 2", size: 5, source: "test" });
 
-  g.stacks.push({ id: 50, owner: 1, size: 4, branches: ["NAND", "Cache"] });
+  g.stacks.push({ id: 50, owner: 1, size: 4, branches: ["NAND", "DRAM Cache"] });
   assert.throws(() => g.playForcedMeasurement(50), RuleError); // no card
   g.players[0]!.quantumCards.push("forcedMeasurement");
   const fm = g.playForcedMeasurement(50);
@@ -191,8 +191,8 @@ test("cards: set kinds, owned-sector bonus, escalation", () => {
 test("missions: cluster pair completes and wins immediately", () => {
   const g = arena({ "Core 0": 9 }, {}, [], { mode: "missions" });
   g.players[1]!.mission = { kind: "sectors", count: 99 };
-  g.players[0]!.mission = { kind: "clusters", clusters: ["SSD", "PSU"] };
-  for (const s of [...map.clusterSectors.get("SSD")!, ...map.clusterSectors.get("PSU")!]) g.sectors.set(s, { owner: 0, troops: 1 });
+  g.players[0]!.mission = { kind: "clusters", clusters: ["SSD", "Power"] };
+  for (const s of [...map.clusterSectors.get("SSD")!, ...map.clusterSectors.get("Power")!]) g.sectors.set(s, { owner: 0, troops: 1 });
   g.sectors.set("VRM", { owner: 1, troops: 1 });
   g.endPhase();
   g.attack("Core 0", "VRM", 5);

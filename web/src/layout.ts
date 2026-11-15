@@ -1,7 +1,7 @@
 /**
  * Board layout: sector boxes, cluster packages and routed connections, computed once per map.
  * Traces and buses use 45° PCB routes; for each one several shapes are tried and the one that
- * avoids sector boxes and overlapping earlier routes wins. PSU cables run around the outside of
+ * avoids sector boxes and overlapping earlier routes wins. Power cables run around the outside of
  * the board, each on its own lane, going the way round that shares the least edge with other cables.
  */
 import type { BoardMap } from "./net.js";
@@ -59,7 +59,7 @@ export function layout(map: BoardMap): Layout {
     if (!pad) {
       for (const s of c.sectors) {
         const r = rects.get(s)!;
-        housings.push({ sector: s, rect: { x: r.x - 12, y: r.y - 12, w: r.w + 24, h: r.h + 24 }, label: `${name} · +${c.bonus}`, labelBelow: false });
+        housings.push({ sector: s, rect: { x: r.x - 12, y: r.y - 12, w: r.w + 24, h: r.h + 24 }, label: `${name} +${c.bonus}`, labelBelow: false });
       }
       continue;
     }
@@ -215,7 +215,7 @@ function overlap(s: Seg, o: Seg, ra: Rect, rb: Rect): number {
   return visible;
 }
 
-/** PSU cables: short ones hang directly; long ones run around the outside on their own lane. */
+/** Power cables: short ones hang directly; long ones run around the outside on their own lane. */
 function cableRoute(a: Pt, b: Pt, lane: number, used: [number, number][]): string {
   if (Math.hypot(a[0] - b[0], a[1] - b[1]) < 360) return curve(a, b);
   const g = 16 + lane * 10;

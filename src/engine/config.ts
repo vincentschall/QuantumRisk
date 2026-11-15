@@ -72,7 +72,7 @@ export const DEFAULT_CONFIG: Omit<GameConfig, "numPlayers"> = {
   missions: {
     clusterPairs: [
       ["CPU", "SSD"],
-      ["GPU", "PSU"],
+      ["GPU", "Power"],
       ["RAM", "SSD"],
     ],
     expansionSectors: { 2: 18, 3: 16, 4: 14 },

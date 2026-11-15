@@ -120,7 +120,9 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 
 ## Repo layout
 
+- `README.md`: short project page (title art, goal, links).
 - `RULEBOOK.md`: player rules.
+- `web/public/art/`: card and title art (WebP, served by the client and used in the docs).
 - `design/map.md`, `map.svg`, `map.yaml`: the map, as a description, a diagram and data.
 - `design/balance.md`: balance analysis and simulation evidence.
 - `src/`, `web/`, `test/`: code.
@@ -135,7 +137,7 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 6. Playable prototype ✓ (local: hot-seat, invite links, bots)
 7. **Deploy** ← *next*: VPS setup, `play.vincentschall.com`, GitHub Pages, link from the personal
    site (and remove its old React site)
-8. Card art and visual polish; human playtests
+8. Card art ✓; human playtests
 9. In-game tutorial (first split, attacking into uncertainty, probing, cards, strategy tips)
 10. Expansions (see variant candidates)
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { PlayerId } from "../../src/engine/types.js";
 import type { Action, GameView, PlayerView } from "../../src/server/protocol.js";
 import { Board, type Effect } from "./Board.js";
@@ -15,7 +15,16 @@ type Tool =
 const PHASES = ["reinforce", "quantum", "attack", "fortify"] as const;
 const PHASE_LABEL: Record<string, string> = { setup: "Setup", reinforce: "Reinforce", quantum: "Quantum", attack: "Attack", fortify: "Fortify", gameOver: "Game over" };
 
-export function GameScreen({ view, map, act, inviteUrl }: { view: GameView; map: BoardMap; act(a: Action): void; inviteUrl: string }) {
+export interface TutorialHooks {
+  /** Coach panel shown at the top of the side bar. */
+  coach?: ReactNode;
+  /** Full overlay over the board (welcome slides). */
+  overlay?: ReactNode;
+  highlight?: Set<string>;
+  dim?: boolean;
+}
+
+export function GameScreen({ view, map, act, inviteUrl, tutorial }: { view: GameView; map: BoardMap; act(a: Action): void; inviteUrl: string; tutorial?: TutorialHooks }) {
   const geo = useMemo(() => geometry(map), [map]);
   const [tool, setTool] = useState<Tool>({ kind: "none" });
   const [pending, setPending] = useState<Record<string, number>>({});
@@ -160,7 +169,8 @@ export function GameScreen({ view, map, act, inviteUrl }: { view: GameView; map:
   return (
     <div className="game">
       <div className="board-wrap">
-        <Board map={map} geo={geo} view={view} selectable={selectable} selected={selected} pending={pending} effects={effects} onSector={onSector} />
+        <Board map={map} geo={geo} view={view} selectable={selectable} selected={selected} pending={pending} effects={effects} onSector={onSector} highlight={tutorial?.highlight} dim={tutorial?.dim} />
+        {tutorial?.overlay}
         {curtain && (
           <div className="curtain">
             <div className="curtain-card" style={{ borderColor: colorOf(me) }}>
@@ -182,6 +192,8 @@ export function GameScreen({ view, map, act, inviteUrl }: { view: GameView; map:
             {view.mode === "missions" ? "Missions" : "Domination"} · round {view.round || 1}
           </span>
         </header>
+
+        {tutorial?.coach}
 
         <Players view={view} />
 
@@ -536,9 +548,9 @@ function Hand(props: {
             <button
               key={i}
               className={`card ${on ? "on" : ""}`}
-              disabled={!canTrade}
+              aria-disabled={!canTrade}
               style={{ borderColor: pt.color, backgroundImage: `url(${art(c.particle)})` }}
-              onClick={() => setTradeSel(on ? tradeSel.filter((x) => x !== i) : tradeSel.length < 3 ? [...tradeSel, i] : tradeSel)}
+              onClick={() => canTrade && setTradeSel(on ? tradeSel.filter((x) => x !== i) : tradeSel.length < 3 ? [...tradeSel, i] : tradeSel)}
               {...hover(sectorPeek(c.particle, c.sector))}
             >
               <span className="particle" style={{ color: pt.color }}>
@@ -564,18 +576,22 @@ function Hand(props: {
       <h4>Quantum cards</h4>
       <div className="qcards">
         {(p.quantumCards ?? []).length === 0 && <p className="muted small">Trade a set of sector cards to get one.</p>}
-        {(p.quantumCards ?? []).map((q, i) => (
+        {(p.quantumCards ?? []).map((q, i) => {
+          // Not `disabled`: disabled buttons get no hover events, and the preview must always open.
+          const playable = canPlay && (q !== "forcedMeasurement" || view.stacks.some((s) => s.owner !== seat));
+          return (
           <button
             key={i}
-            className="qcard"
-            disabled={!canPlay || (q === "forcedMeasurement" && !view.stacks.some((s) => s.owner !== seat))}
-            onClick={() => (q === "forcedMeasurement" ? setTool({ kind: "forced" }) : act({ type: "extraSplit" }))}
+            className={`qcard ${playable ? "" : "off"}`}
+            aria-disabled={!playable}
+            onClick={() => playable && (q === "forcedMeasurement" ? setTool({ kind: "forced" }) : act({ type: "extraSplit" }))}
             style={{ borderColor: QUANTUM, backgroundImage: `url(${art(q === "forcedMeasurement" ? "forced-measurement" : "extra-split")})` }}
             {...hover(QUANTUM_PEEK[q]!)}
           >
             <span className="qname">{q === "forcedMeasurement" ? "Forced Measure\u00ADment" : "Extra Split"}</span>
           </button>
-        ))}
+          );
+        })}
       </div>
       {peek && (
         <div className="peek">

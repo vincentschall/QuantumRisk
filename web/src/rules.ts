@@ -92,6 +92,7 @@ export function sourceLabel(src: string): string {
   if (src.startsWith("moth-qpu")) return `quantum hardware${src.includes(":") ? ` (${src.split(":")[1]})` : ""}`;
   if (src.startsWith("moth-coin-qpu")) return "quantum hardware";
   if (src.startsWith("moth")) return "quantum emulator";
+  if (src === "tutorial") return "browser randomness, tutorial only";
   return "local backup";
 }
 

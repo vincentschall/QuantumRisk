@@ -29,6 +29,9 @@ interface Props {
   onSector(s: string, e: React.MouseEvent): void;
   /** Map export: show sector names only. */
   blank?: boolean;
+  /** Tutorial: sectors to point at, optionally fading the rest. */
+  highlight?: Set<string>;
+  dim?: boolean;
 }
 
 function Substrate() {
@@ -159,15 +162,18 @@ function Sector(props: {
   selected: boolean;
   pending: number;
   blank?: boolean;
+  hl?: boolean;
+  dimmed?: boolean;
   onClick(e: React.MouseEvent): void;
 }) {
   const [x, y] = props.pos;
   const NW = sectorWidth(props.name, props.stronghold);
   const color = colorOf(props.owner);
-  const cls = ["sector", props.selectable && "selectable", props.selected && "selected"].filter(Boolean).join(" ");
+  const cls = ["sector", props.selectable && "selectable", props.selected && "selected", props.dimmed && "dimmed"].filter(Boolean).join(" ");
   return (
     <g className={cls} transform={`translate(${x - NW / 2},${y - NH / 2})`} onClick={props.onClick} onContextMenu={props.onClick}>
       <rect className="hit" x="-6" y="-6" width={NW + 12} height={NH + 12} rx="12" />
+      {props.hl && <rect x="-10" y="-10" width={NW + 20} height={NH + 20} rx="15" className="tut-ring" />}
       {props.stack && <rect x="-7" y="-7" width={NW + 14} height={NH + 14} rx="13" className="branch-ring" stroke={colorOf(props.stack.owner)} />}
       <rect width={NW} height={NH} rx="8" className="body" style={{ stroke: color, fill: `color-mix(in srgb, ${color} 22%, #0b1116)` }} />
       {props.stronghold && (
@@ -233,7 +239,7 @@ function Effects({ map, effects }: { map: BoardMap; effects: Effect[] }) {
   );
 }
 
-function BoardImpl({ map, geo, view, selectable, selected, pending, effects, onSector, blank }: Props) {
+function BoardImpl({ map, geo, view, selectable, selected, pending, effects, onSector, blank, highlight, dim }: Props) {
   const stackAt = useMemo(() => {
     const m = new Map<string, QuantumStack>();
     for (const st of view.stacks) for (const b of st.branches) m.set(b, st);
@@ -267,6 +273,8 @@ function BoardImpl({ map, geo, view, selectable, selected, pending, effects, onS
           selected={selected.includes(s)}
           pending={pending[s] ?? 0}
           blank={blank}
+          hl={highlight?.has(s)}
+          dimmed={dim && highlight !== undefined && highlight.size > 0 && !highlight.has(s)}
           onClick={(e) => onSector(s, e)}
         />
       ))}

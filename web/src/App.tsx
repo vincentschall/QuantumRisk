@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import type { SeatKind } from "../../src/server/protocol.js";
 import { GameScreen } from "./Game.js";
 import { hasSavedSeats, useConnection } from "./net.js";
 import { colorOf } from "./rules.js";
+// The tutorial bundles the rules engine and the map, so it loads only when opened.
+const Tutorial = lazy(() => import("./tutorial/Tutorial.js").then((m) => ({ default: m.Tutorial })));
+
+const isTutorialHash = () => location.hash === "#tutorial";
 
 const initialRoom = new URLSearchParams(location.search).get("room");
 
@@ -10,6 +14,19 @@ export function App() {
   const conn = useConnection();
   const [joinName, setJoinName] = useState("");
   const [askName, setAskName] = useState(false);
+  const [tutorial, setTutorial] = useState(isTutorialHash);
+
+  // The tutorial lives at #tutorial, so the browser's back button returns to the menu.
+  useEffect(() => {
+    const onHash = () => setTutorial(isTutorialHash());
+    addEventListener("hashchange", onHash);
+    return () => removeEventListener("hashchange", onHash);
+  }, []);
+  const openTutorial = () => (location.hash = "tutorial");
+  const closeTutorial = () => {
+    history.pushState(null, "", location.pathname + location.search);
+    setTutorial(false);
+  };
 
   // Opening a link with ?room=…: resume your seats, or ask for a name to take an open seat.
   useEffect(() => {
@@ -35,7 +52,11 @@ export function App() {
           {conn.error}
         </div>
       )}
-      {conn.view && conn.map ? (
+      {tutorial && !conn.view ? (
+        <Suspense fallback={<p className="lobby muted">Loading the tutorial…</p>}>
+          <Tutorial onExit={closeTutorial} />
+        </Suspense>
+      ) : conn.view && conn.map ? (
         <GameScreen view={conn.view} map={conn.map} act={conn.act} inviteUrl={inviteUrl} />
       ) : askName && initialRoom ? (
         <div className="lobby">
@@ -55,7 +76,7 @@ export function App() {
           </section>
         </div>
       ) : (
-        <Lobby onCreate={conn.create} />
+        <Lobby onCreate={conn.create} onTutorial={openTutorial} />
       )}
     </>
   );
@@ -72,7 +93,7 @@ function Title() {
 
 const KIND_LABEL: Record<SeatKind, string> = { local: "Here", open: "Invite", bot: "Bot" };
 
-function Lobby({ onCreate }: { onCreate(mode: "missions" | "domination", seats: { kind: SeatKind; name: string }[]): void }) {
+function Lobby({ onCreate, onTutorial }: { onCreate(mode: "missions" | "domination", seats: { kind: SeatKind; name: string }[]): void; onTutorial(): void }) {
   const [count, setCount] = useState(3);
   const [mode, setMode] = useState<"missions" | "domination">("missions");
   const [seats, setSeats] = useState<{ kind: SeatKind; name: string }[]>([
@@ -85,6 +106,14 @@ function Lobby({ onCreate }: { onCreate(mode: "missions" | "domination", seats: 
   return (
     <div className="lobby">
       <Title />
+      <button className="tutorial-cta" onClick={onTutorial}>
+        <img src={`${import.meta.env.BASE_URL}art/extra-split.webp`} alt="" />
+        <span>
+          <b>New here? Play the interactive tutorial</b>
+          <small>Learn the board, battles, cards and superposition by playing real moves. About 15 minutes.</small>
+        </span>
+        <span className="arrow">→</span>
+      </button>
       <section className="panel">
         <h3>New game</h3>
         <div className="row">

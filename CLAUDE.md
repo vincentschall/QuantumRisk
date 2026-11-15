@@ -25,8 +25,10 @@ together.
    expansions, and only come after superposition is proven in playtests.
 7. **Original IP.** Own map with generic component names (no hardware brands), own wording, and no
    trademarked names, art or text.
-8. **English only. No lore or factions:** players are plain colours with ordinary troops. Sector
-   cards show particles (proton / neutron / electron, photon = wild).
+8. **English only. No factions, minimal lore:** players are plain colours with ordinary troops. The
+   only story is the short setting at the start of the tutorial (commanders fighting over a
+   mainboard). Sector cards show particles (proton / neutron / electron, photon = wild), and card
+   texts carry real physics facts instead of lore.
 
 ## Settled decisions not visible in the rules
 
@@ -112,11 +114,15 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
   `npm run moth` CLI (`check`, `pool`, `fill`, `game`).
 - `src/sim/`: heuristic bots and the experiment runner. The game server uses the same bots.
 - `src/server/`: the game server. `protocol.ts` (message and view types, shared with the web
-  client), `room.ts` (one game: seats, per-seat views, bot driver that replays bot turns event by
-  event), `main.ts` (HTTP health check and the `/ws` WebSocket).
+  client), `view.ts` (per-seat views and action dispatch; pure, also used by the tutorial),
+  `room.ts` (one game: seats, bot driver that replays bot turns event by event), `main.ts` (HTTP
+  health check and the `/ws` WebSocket).
 - `web/`: the browser client. `layout.ts` (sector boxes, packages and automatic 45° trace and
   cable routing), `Board.tsx` (the mainboard SVG), `Game.tsx` (turn controls, hand,
-  log, hot-seat curtain), `rules.ts` (client-side previews only; the server decides), `net.ts`.
+  log, hot-seat curtain, card previews), `rules.ts` (client-side previews only; the server decides),
+  `net.ts`. `tutorial/`: the interactive tutorial at `#tutorial`. It runs the engine in the browser
+  on hand-built positions (`scenarios.ts`), follows a script of chapters and steps (`steps.tsx`)
+  and needs no server. Its measurements use browser randomness and are labelled as such.
 
 ## Repo layout
 
@@ -138,7 +144,7 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 7. **Deploy** ← *next*: VPS setup, `play.vincentschall.com`, GitHub Pages, link from the personal
    site (and remove its old React site)
 8. Card art ✓; human playtests
-9. In-game tutorial (first split, attacking into uncertainty, probing, cards, strategy tips)
+9. Interactive tutorial ✓
 10. Expansions (see variant candidates)
 
 ## Working agreements

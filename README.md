@@ -14,4 +14,7 @@ The measurements come from quantum circuits run on the
 [Moth Quantum platform](https://docs.mothquantum.com/docs/intro), on real quantum hardware or on
 Moth's quantum emulator.
 
+New to the game? Start the **interactive tutorial** from the game's menu: about 15 minutes of real
+moves that teach the board, battles, cards and superposition.
+
 📖 Full rules: [RULEBOOK.md](RULEBOOK.md)

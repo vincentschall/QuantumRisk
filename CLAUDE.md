@@ -71,8 +71,11 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
   - `emu` takes about 7 s per job. `qpu` on `ibm_fez` took 23 s, but hardware queues can take hours.
   - Long-poll with `GET /jobs/{id}/status?wait=10s`. 300 requests/min per key.
 - **Measurement source:** hybrid, in this order:
-  1. The pool of pre-fetched QPU bits (`quantum-pool/pool.json`, gitignored, filled with
-     `npm run moth -- fill`).
+  1. The pool of pre-fetched QPU bits (`quantum-pool/pool.json`, gitignored). The game server
+     refills it itself: when it has fewer than `POOL_MIN_BITS` (default 5,000) unused bits, it
+     starts one background QPU job (`src/node/poolRefill.ts`), checked every 10 minutes, within
+     the daily credit budget, and waits an hour after a failed job. `npm run moth -- fill` fills
+     it by hand.
   2. A live `emu` job.
   3. Local Web Crypto.
   - Every bit is used exactly once. Each measurement is logged with its source (e.g.
@@ -114,7 +117,8 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
   - Randomness is injected through `RandomSource`; quantum measurements go through its `measure()`.
 - `src/quantum/`: the Moth client, bit providers (Comet, coin toss, local crypto) and `QuantumSource`,
   the buffered `RandomSource` for real games. Pure apart from `fetch` and Web Crypto.
-- `src/node/`: Node-only helpers: map loading, the bit pool file, the daily Moth credit budget,
+- `src/node/`: Node-only helpers: map loading, the bit pool file and its background QPU refill,
+  the daily Moth credit budget,
   `createHybridSource`, and the
   `npm run moth` CLI (`check`, `pool`, `fill`, `game`).
 - `src/sim/`: heuristic bots and the experiment runner. The game server uses the same bots.

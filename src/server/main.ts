@@ -2,14 +2,18 @@
  * QuantumRisk game server: HTTP health check plus one WebSocket endpoint (/ws).
  * The server runs the engine and Moth; browsers only receive what their seats may see.
  *   PORT (default 8787), ALLOWED_ORIGINS (comma-separated; default: any), MOTH_API_KEY (via .env),
- *   MOTH_DAILY_CREDITS (default 100), TRUST_PROXY (1 behind Caddy: client IP from X-Forwarded-For)
+ *   MOTH_DAILY_CREDITS (default 100), TRUST_PROXY (1 behind Caddy: client IP from X-Forwarded-For),
+ *   POOL_MIN_BITS (default 5000; start a background QPU job when the bit pool has fewer; 0 = off)
  */
 import { createServer } from "node:http";
 import { WebSocketServer, type WebSocket } from "ws";
 import { RuleError, type PlayerId } from "../engine/index.js";
 import { loadMap } from "../node/loadMap.js";
+import { PoolFileProvider } from "../node/bitPool.js";
 import { DailyBudget } from "../node/budget.js";
-import { createHybridSource } from "../node/quantumSource.js";
+import { PoolRefiller } from "../node/poolRefill.js";
+import { COMET_CREDITS, createHybridSource, mothApiKey, mothClient } from "../node/quantumSource.js";
+import { CometProvider } from "../quantum/index.js";
 import { clientIp, ConnectionCounter, TokenBucket, WindowLimit } from "./limits.js";
 import type { ClientMessage, ServerMessage } from "./protocol.js";
 import { Room, roomId, type Listener } from "./room.js";
@@ -30,7 +34,9 @@ const map = loadMap();
 const mapDef = map.def as typeof map.def & { positions: Record<string, [number, number]> };
 const budget = new DailyBudget(Number(process.env.MOTH_DAILY_CREDITS ?? 100));
 const lastProviderError = new Map<string, number>();
+const pool = new PoolFileProvider();
 const source = createHybridSource({
+  pool,
   budget,
   onProviderError: (p, e) => {
     // Once the budget is used up every refill fails the same way, so repeat a message at most every 10 minutes.
@@ -40,6 +46,22 @@ const source = createHybridSource({
     log(msg);
   },
 });
+const POOL_MIN_BITS = Number(process.env.POOL_MIN_BITS ?? 5000);
+const refiller =
+  mothApiKey() && POOL_MIN_BITS > 0
+    ? new PoolRefiller({
+        pool,
+        qpu: new CometProvider(mothClient(), { mode: "qpu", timeoutMs: 6 * 3600_000 }),
+        budget,
+        credits: COMET_CREDITS,
+        minBits: POOL_MIN_BITS,
+        log,
+      })
+    : null;
+if (refiller) {
+  refiller.check();
+  setInterval(() => refiller.check(), 600_000).unref();
+}
 void source.ready(64).then(() => log(`measurement buffer ready: ${JSON.stringify(source.bufferedBySource())}`));
 
 const rooms = new Map<string, Room>();
@@ -49,7 +71,7 @@ const roomCreations = new WindowLimit(ROOMS_PER_IP_PER_HOUR, 3600_000);
 const http = createServer((req, res) => {
   if (req.url === "/health") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ ok: true, rooms: rooms.size, bits: source.bufferedBySource(), mothCreditsToday: `${budget.spent()}/${budget.limit}` }));
+    res.end(JSON.stringify({ ok: true, rooms: rooms.size, bits: source.bufferedBySource(), pool: pool.available(), poolRefill: refiller?.status() ?? "off", mothCreditsToday: `${budget.spent()}/${budget.limit}` }));
     return;
   }
   res.writeHead(404).end();

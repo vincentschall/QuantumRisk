@@ -3,7 +3,9 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
+import { PoolFileProvider } from "../src/node/bitPool.js";
 import { BudgetedProvider, DailyBudget } from "../src/node/budget.js";
+import { PoolRefiller } from "../src/node/poolRefill.js";
 import { LocalCryptoProvider } from "../src/quantum/index.js";
 import { clientIp, ConnectionCounter, TokenBucket, WindowLimit } from "../src/server/limits.js";
 
@@ -48,4 +50,37 @@ test("daily credit budget stops a paid provider and resets the next day", async 
   assert.equal(budget.spent(), 0);
   await p.fetch(8);
   assert.equal(budget.spent(), 5);
+});
+
+test("pool refiller starts one QPU job when the pool is low, and backs off after a failure", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "qr-refill-"));
+  const pool = new PoolFileProvider(join(dir, "pool.json"));
+  const budget = new DailyBudget(100, join(dir, "budget.json"));
+  let t = 0;
+  let calls = 0;
+  let fail = false;
+  const qpu = {
+    name: "fake-qpu",
+    fetch: async () => {
+      calls++;
+      if (fail) throw new Error("queue timeout");
+      return { source: "moth-qpu:fake", hex: "ab".repeat(1000), used: 0 };
+    },
+  };
+  const r = new PoolRefiller({ pool, qpu, budget, credits: 5, minBits: 5000, retryMs: 1000, now: () => t });
+  const job = r.check();
+  assert.equal(r.check(), job); // only one job at a time
+  await job;
+  assert.equal(calls, 1);
+  assert.equal(pool.available(), 8000);
+  assert.equal(budget.spent(), 5);
+  assert.equal(r.check(), null); // pool is full enough now
+  await pool.fetch(4000); // drain below the threshold
+  fail = true;
+  await r.check();
+  assert.equal(calls, 2);
+  assert.equal(r.check(), null); // waiting after the failure
+  t = 1000;
+  await r.check();
+  assert.equal(calls, 3);
 });

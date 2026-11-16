@@ -17,6 +17,7 @@ separately to GitHub Pages (`.github/workflows/pages.yml`).
 MOTH_API_KEY=…
 ALLOWED_ORIGINS=https://vincentschall.com
 MOTH_DAILY_CREDITS=100
+POOL_MIN_BITS=5000
 ```
 
 Compose sets `TRUST_PROXY=1`, so the server takes client IPs from Caddy's `X-Forwarded-For`.
@@ -25,6 +26,9 @@ Compose sets `TRUST_PROXY=1`, so the server takes client IPs from Caddy's `X-For
 
 - `../quantum-pool/` holds `pool.json` (pre-fetched QPU bits) and `budget.json` (Moth credits
   spent today). It must be writable by uid 1000: `sudo chown -R 1000:1000 quantum-pool`.
+- When the pool has fewer than `POOL_MIN_BITS` unused bits, the server starts one QPU job in the
+  background (checked every 10 minutes; `0` turns this off). `/health` shows the pool size and
+  the refill status. A restart drops a job that is still queued.
 - Caddy keeps its certificates in the `caddy-data` volume.
 
 ## Commands (run in `deploy/`)
@@ -34,7 +38,7 @@ docker compose up -d --build        # build and (re)start
 docker compose logs -f game         # server log
 curl https://play.vincentschall.com/health
 docker compose exec game node src/node/mothCli.js pool   # pool status
-docker compose exec game node src/node/mothCli.js fill   # top up the pool with QPU bits
+docker compose exec game node src/node/mothCli.js fill   # top up the pool by hand
 ```
 
 A redeploy is `git pull` followed by `docker compose up -d --build`. Games live in memory, so a

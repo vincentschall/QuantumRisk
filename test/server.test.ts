@@ -84,3 +84,16 @@ test("a full game can be played through the room", async () => {
   assert.ok(last!.players.every((p) => p.mission !== undefined), "missions revealed at the end");
   r.stop();
 });
+
+test("a bot that is the last one placing setup troops is not taken for stalled", () => {
+  const r = room(["local", "bot"]);
+  const g = r.game;
+  // The human is done; the bot still has several chunks to place, so it keeps the turn.
+  g.setupRemaining = g.setupRemaining.map((_, i) => (i === 1 ? 3 * g.config.setupChunk : 0));
+  g.current = 1;
+  const internals = r as unknown as { playBotMove(b: unknown): void; botsStalled: boolean; seats: { bot?: unknown }[] };
+  internals.playBotMove(internals.seats[1]!.bot);
+  assert.equal(g.current, 1);
+  assert.equal(internals.botsStalled, false);
+  r.stop();
+});

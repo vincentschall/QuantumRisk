@@ -139,7 +139,9 @@ export class Room {
 
   private playBotMove(bot: Bot): void {
     const g = this.game;
-    const before = { player: g.current, round: g.round, phase: g.phase };
+    // Setup troops left count as progress: a player who is the last one still placing keeps the turn.
+    const setupLeft = () => g.setupRemaining.reduce((a, b) => a + b, 0);
+    const before = { player: g.current, round: g.round, phase: g.phase, setupLeft: setupLeft() };
     try {
       if (g.phase === "setup") bot.setup(g);
       else bot.turn(g);
@@ -158,7 +160,13 @@ export class Room {
         /* nothing more to do */
       }
     }
-    if (!g.isOver && g.current === before.player && g.round === before.round && g.phase === before.phase) {
+    if (
+      !g.isOver &&
+      g.current === before.player &&
+      g.round === before.round &&
+      g.phase === before.phase &&
+      setupLeft() === before.setupLeft
+    ) {
       this.log(`room ${this.id}: bot did not advance; stopping bots`);
       this.botsStalled = true;
     }

@@ -46,7 +46,9 @@ export function App() {
   return (
     <>
       <DesktopNotice />
-      {conn.status !== "open" && <div className="status">{conn.status === "connecting" ? "Connecting to the game server…" : "Connection lost, reconnecting…"}</div>}
+      {conn.status !== "open" && conn.status !== "offline" && !(tutorial && !conn.view) && (
+        <div className="status">{conn.status === "connecting" ? "Connecting to the game server…" : "Connection lost, reconnecting…"}</div>
+      )}
       {conn.error && (
         <div className="toast" onClick={conn.clearError}>
           {conn.error}
@@ -73,10 +75,15 @@ export function App() {
               </button>
               <button onClick={() => conn.join(initialRoom)}>Just watch</button>
             </div>
+            {conn.status === "offline" && (
+              <p className="offline">
+                The game server can't be reached right now. This page keeps trying to connect. Meanwhile, the <a href="#tutorial">tutorial</a> works without it.
+              </p>
+            )}
           </section>
         </div>
       ) : (
-        <Lobby onCreate={conn.create} onTutorial={openTutorial} />
+        <Lobby onCreate={conn.create} onTutorial={openTutorial} offline={conn.status === "offline"} />
       )}
     </>
   );
@@ -93,7 +100,15 @@ function Title() {
 
 const KIND_LABEL: Record<SeatKind, string> = { local: "Here", open: "Invite", bot: "Bot" };
 
-function Lobby({ onCreate, onTutorial }: { onCreate(mode: "missions" | "domination", seats: { kind: SeatKind; name: string }[]): void; onTutorial(): void }) {
+function Lobby({
+  onCreate,
+  onTutorial,
+  offline,
+}: {
+  onCreate(mode: "missions" | "domination", seats: { kind: SeatKind; name: string }[]): void;
+  onTutorial(): void;
+  offline: boolean;
+}) {
   const [count, setCount] = useState(3);
   const [mode, setMode] = useState<"missions" | "domination">("missions");
   const [seats, setSeats] = useState<{ kind: SeatKind; name: string }[]>([
@@ -156,12 +171,17 @@ function Lobby({ onCreate, onTutorial }: { onCreate(mode: "missions" | "dominati
           <b>Here</b>: plays on this screen (pass it around for hot-seat). <b>Invite</b>: you get a link to send. <b>Bot</b>: the computer plays (all bots: watch a game). Seat 1 starts; later seats get a few extra
           starting troops.
         </p>
-        <button className="primary big" onClick={() => onCreate(mode, active)}>
+        {offline && (
+          <p className="offline">
+            The game server can't be reached right now, so new games can't start. The tutorial above works without it. This page keeps trying to connect.
+          </p>
+        )}
+        <button className="primary big" disabled={offline} onClick={() => onCreate(mode, active)}>
           Start game
         </button>
       </section>
       <footer className="muted small">
-        Quantum measurements run on the Moth Quantum platform. <a href="https://github.com/vincentschall/QuantumRisk">Rules & source</a>
+        Quantum measurements run on the Moth Quantum platform. <a href="https://github.com/vincentschall/quantumrisk">Rules & source</a>
       </footer>
     </div>
   );

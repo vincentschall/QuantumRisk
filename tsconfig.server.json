@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "outDir": "build", "declaration": false, "sourceMap": true },
+  "include": ["src/server/main.ts", "src/node/mothCli.ts"]
+}

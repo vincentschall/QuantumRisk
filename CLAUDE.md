@@ -92,7 +92,11 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 - **Web client:** React + Vite, board drawn as SVG from `design/map.yaml` (positions included), served by
   GitHub Pages at `vincentschall.com/quantumrisk/` (`.github/workflows/pages.yml`).
 - **Game server:** Node + `ws` on a Strato VPS (VPS S, Ubuntu LTS) at `play.vincentschall.com`,
-  behind Caddy for HTTPS. `ALLOWED_ORIGINS` restricts which sites may connect.
+  in Docker behind Caddy for HTTPS (`deploy/README.md`). `ALLOWED_ORIGINS` restricts which sites
+  may connect.
+  - Abuse limits: connections and new games per IP, a per-connection message rate, and
+    `MOTH_DAILY_CREDITS` (a daily Moth credit budget, kept in `quantum-pool/budget.json`). Once
+    the budget is used up, live jobs stop and measurements fall back to local randomness.
 
 ## Code
 
@@ -110,13 +114,14 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
   - Randomness is injected through `RandomSource`; quantum measurements go through its `measure()`.
 - `src/quantum/`: the Moth client, bit providers (Comet, coin toss, local crypto) and `QuantumSource`,
   the buffered `RandomSource` for real games. Pure apart from `fetch` and Web Crypto.
-- `src/node/`: Node-only helpers: map loading, the bit pool file, `createHybridSource`, and the
+- `src/node/`: Node-only helpers: map loading, the bit pool file, the daily Moth credit budget,
+  `createHybridSource`, and the
   `npm run moth` CLI (`check`, `pool`, `fill`, `game`).
 - `src/sim/`: heuristic bots and the experiment runner. The game server uses the same bots.
 - `src/server/`: the game server. `protocol.ts` (message and view types, shared with the web
   client), `view.ts` (per-seat views and action dispatch; pure, also used by the tutorial),
-  `room.ts` (one game: seats, bot driver that replays bot turns event by event), `main.ts` (HTTP
-  health check and the `/ws` WebSocket).
+  `room.ts` (one game: seats, bot driver that replays bot turns event by event), `limits.ts`
+  (abuse limits), `main.ts` (HTTP health check and the `/ws` WebSocket).
 - `web/`: the browser client. `layout.ts` (sector boxes, packages and automatic 45° trace and
   cable routing), `Board.tsx` (the mainboard SVG), `Game.tsx` (turn controls, hand,
   log, hot-seat curtain, card previews), `rules.ts` (client-side previews only; the server decides),
@@ -132,6 +137,7 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 - `design/map.md`, `map.svg`, `map.yaml`: the map, as a description, a diagram and data.
 - `design/balance.md`: balance analysis and simulation evidence.
 - `src/`, `web/`, `test/`: code.
+- `Dockerfile`, `tsconfig.server.json`, `deploy/`: production packaging for the game server.
 
 ## Roadmap
 
@@ -141,8 +147,24 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
 4. Moth integration ✓
 5. Tech stack decision ✓
 6. Playable prototype ✓ (local: hot-seat, invite links, bots)
-7. **Deploy** ← *next*: VPS setup, `play.vincentschall.com`, GitHub Pages, link from the personal
-   site (and remove its old React site)
+7. **Deploy** ← *next*. GitHub Pages is already enabled for the repo (build type: workflow) and
+   serves at `vincentschall.com/quantumrisk/`. The Strato VPS (VPS Linux S) is activated and ready to install.
+   - **Before the server ✓:** Docker packaging with Caddy (`deploy/`), abuse limits and the daily
+     Moth credit budget, the server-offline message in the lobby, the footer link and the
+     link-preview tags. The compiled server is smoke-tested. The Docker image itself is not yet
+     tested: Vincent's user isn't in the `docker` group, so run `DOMAIN=localhost docker compose up
+     --build` in `deploy/` with sudo, or add the user to the group first.
+   - **Server day:**
+     5. VPS: Vincent installs his SSH key (password step), then a firewall (22/80/443), Docker,
+        the deploy, and the Moth key on the server.
+     6. DNS: A record `play` → VPS IP at Strato.
+     7. Pages workflow: switch to deploy on push and run it once.
+     8. Personal site (`../vincentschall.github.io`): remove the old React site (`old/`) and add
+        the "If you are here for Quantum Risk, here is the link" link.
+   - **Open question for Vincent:** whether the site needs an Impressum or privacy notice (German
+     domain; the server sees IP addresses).
+   - **Known limitation:** games live in memory, so a server restart or redeploy ends running
+     games. Fine for a first version.
 8. Card art ✓; human playtests
 9. Interactive tutorial ✓
 10. Expansions (see variant candidates)

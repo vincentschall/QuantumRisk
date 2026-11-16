@@ -1,0 +1,6 @@
+# DOMAIN is play.vincentschall.com in production (Let's Encrypt certificate) and localhost for a
+# local test (Caddy's own local certificate).
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy game:8787
+}

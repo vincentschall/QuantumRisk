@@ -1,0 +1,30 @@
+# Game server behind Caddy (automatic HTTPS). Run from this folder: docker compose up -d --build
+# Secrets and per-host settings come from ../.env (see ../.env.example).
+services:
+  game:
+    build: ..
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      TRUST_PROXY: "1"
+    volumes:
+      - ../quantum-pool:/app/quantum-pool
+    expose:
+      - "8787"
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on: [game]
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:-play.vincentschall.com}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+volumes:
+  caddy-data:
+  caddy-config:

@@ -28,7 +28,8 @@ export function hasSavedSeats(room: string): boolean {
 }
 
 export interface Connection {
-  status: "connecting" | "open" | "closed";
+  /** "offline": the server has not been reachable since the page loaded (it keeps retrying). "closed": a live connection dropped. */
+  status: "connecting" | "open" | "closed" | "offline";
   view: GameView | null;
   map: BoardMap | null;
   room: string | null;
@@ -59,13 +60,15 @@ export function useConnection(): Connection {
   useEffect(() => {
     let stopped = false;
     let retry = 0;
+    let everOpen = false;
     let timer: ReturnType<typeof setTimeout>;
     const connect = () => {
-      setStatus("connecting");
+      if (everOpen || retry === 0) setStatus("connecting");
       const sock = new WebSocket(SERVER_URL);
       ws.current = sock;
       sock.onopen = () => {
         retry = 0;
+        everOpen = true;
         setStatus("open");
         // Resume the current room after a reconnect.
         if (roomRef.current && !queue.current.some((m) => m.t === "join" || m.t === "create"))
@@ -87,7 +90,7 @@ export function useConnection(): Connection {
         else if (m.t === "error") setError(m.message);
       };
       sock.onclose = () => {
-        setStatus("closed");
+        setStatus(everOpen ? "closed" : "offline");
         if (!stopped) timer = setTimeout(connect, Math.min(1000 * 2 ** retry++, 10_000));
       };
     };

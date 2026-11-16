@@ -155,10 +155,10 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
      tested: Vincent's user isn't in the `docker` group, so run `DOMAIN=localhost docker compose up
      --build` in `deploy/` with sudo, or add the user to the group first.
    - **Server day:**
-     5. VPS: Vincent installs his SSH key (password step), then a firewall (22/80/443), Docker,
-        the deploy, and the Moth key on the server.
-     6. DNS: A record `play` → VPS IP at Strato.
-     7. Pages workflow: switch to deploy on push and run it once.
+     5. VPS ✓: Ubuntu 24.04 at 87.106.130.184, user `vincent` with key-only SSH (no root login),
+        ufw (22/80/443), Docker, the repo in `/opt/quantumrisk`, the Moth key and the bit pool.
+     6. DNS ✓: A record `play` → VPS IP at Strato. `/health` answers over HTTPS.
+     7. Pages workflow: deploys on every push to `main`; run it once and play a test game.
      8. Personal site (`../vincentschall.github.io`): remove the old React site (`old/`) and add
         the "If you are here for Quantum Risk, here is the link" link.
    - **Open question for Vincent:** whether the site needs an Impressum or privacy notice (German

@@ -1,7 +1,8 @@
 # Builds the web client and publishes it with GitHub Pages (vincentschall.com/quantumrisk/).
-# Manual for now; switch to `push` once Pages is enabled and the game server is live.
 name: Deploy web client
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

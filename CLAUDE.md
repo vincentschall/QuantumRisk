@@ -159,10 +159,11 @@ Docs: https://docs.mothquantum.com/docs/intro · API: `https://api.mothquantum.c
         ufw (22/80/443), Docker, the repo in `/opt/quantumrisk`, the Moth key and the bit pool.
      6. DNS ✓: A record `play` → VPS IP at Strato. `/health` answers over HTTPS.
      7. Pages workflow: deploys on every push to `main`; run it once and play a test game.
-     8. Personal site (`../vincentschall.github.io`): remove the old React site (`old/`) and add
-        the "If you are here for Quantum Risk, here is the link" link.
-   - **Open question for Vincent:** whether the site needs an Impressum or privacy notice (German
-     domain; the server sees IP addresses).
+     8. Personal site (`../vincentschall.github.io`) ✓: the old React site is removed, and the page
+        links to `/quantumrisk/`.
+   - **Impressum** ✓ at `vincentschall.com/impressum/` (personal site repo), linked from the lobby
+     footer. **Open:** a short privacy notice (GitHub Pages logs IPs; the game server keeps IPs only
+     in memory for the abuse limits; seat tokens in localStorage; no cookies or tracking).
    - **Known limitation:** games live in memory, so a server restart or redeploy ends running
      games. Fine for a first version.
 8. Card art ✓; human playtests

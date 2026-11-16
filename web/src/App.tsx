@@ -181,7 +181,7 @@ function Lobby({
         </button>
       </section>
       <footer className="muted small">
-        Quantum measurements run on the Moth Quantum platform. <a href="https://github.com/vincentschall/quantumrisk">Rules & source</a>
+        Quantum measurements run on the Moth Quantum platform. <a href="https://github.com/vincentschall/quantumrisk">Rules & source</a> · <a href="https://vincentschall.com/impressum/">Impressum</a>
       </footer>
     </div>
   );
